@@ -15,12 +15,14 @@ double get_corr(int npairs)
   TRandom3 angle(0);
   vector < double > ang; //inserting the pairs into a single object
 
-  //Below is our "for" loop
-
-  for ( int i = 0; i < npairs; ++i ) // int = integer, i is the variable that can always be at 0, i < 100 means go up to 100 events, ++i checks if it's less t\
-han 100 and adds 1 -- if more than 100, than the program stops
+  // Below is our "for" loop
+  // int = integer, i is the variable that can always be at 0,
+  // i < 100 means go up to 100 events, ++i checks if it's less
+  // than 100 and adds 1 -- if more than 100, than the program stops
+  for ( int i = 0; i < npairs; ++i )
     {
-      double phi1 = angle.Uniform(-3.1415926535,3.1415926535); //double means an exact number, phi1 is the name of the double for particle 1.
+      //double means an exact number, phi1 is the name of the double for particle 1.
+      double phi1 = angle.Uniform(-3.1415926535,3.1415926535);
       double phi2 = 0; //same as above, but for particle 2
       if ( phi1 > 0 ) phi2 = phi1 - 3.1415926535;
       if ( phi1 < 0 ) phi2 = phi1 + 3.1415926535;
