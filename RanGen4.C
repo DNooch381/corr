@@ -21,8 +21,10 @@ double get_corr4 (int npairs)
 
       if ( phi1 > 0 ) phi2 = phi1 - 3.1415926535;
       if ( phi1 < 0 ) phi2 = phi1 + 3.1415926535;
-      if ( phi3 > 0 ) phi4 = phi1 - 3.1415926535;
-      if ( phi3 < 0 ) phi4 = phi1 + 3.1415926535;
+      if ( phi1 > 0 ) phi3 = phi1 - 0.1;
+      if ( phi1 < 0 ) phi3 = phi1 + 0.1;
+      if ( phi1 > 0 ) phi4 = phi1 - 0.1;
+      if ( phi1 < 0 ) phi4 = phi1 + 0.1;
 
       cout << phi1 << " " << phi2 << endl;
       cout << phi3 << " " << phi4 << endl;
@@ -32,8 +34,8 @@ double get_corr4 (int npairs)
       ang.push_back (phi2);
       cout << " " << endl;
 
-      ang.push_back (phi1);
-      ang.push_back (phi2);
+      ang.push_back (phi3);
+      ang.push_back (phi4);
       cout << " " << endl;
     }
 
