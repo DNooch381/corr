@@ -1,5 +1,3 @@
-//#include "Header.h"
-
 const int maxCorrelator = 12;
 const int maxHarmonic = 10;
 const int maxPower = 9;
