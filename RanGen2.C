@@ -1,10 +1,13 @@
+#include "Recursion.C"
+
 double get_corr(int);
 
 void RanGen2()
 {
+  Init(); // initialize histograms
   double x = get_corr (9); // number of correlations for phi1
-  cout <<endl;
-  cout <<endl;
+  //cout <<endl;
+  //cout <<endl;
   double y = get_corr (9); // number of correlations for phi2
 } //end of void RanGen2()
 
@@ -12,10 +15,10 @@ double get_corr(int npairs)
 {
   TRandom3 angle(0);
 
-  static const int maxCorrelator = 12;
-  static const int maxHarmonic = 10;
-  static const int maxPower = 9;
-  TComplex Qvector[maxHarmonic][maxPower];
+  // static const int maxCorrelator = 12;
+  // static const int maxHarmonic = 10;
+  // static const int maxPower = 9;
+  // TComplex Qvector[maxHarmonic][maxPower];
 
   for(int h=0;h<maxHarmonic;h++)
     {
@@ -38,8 +41,8 @@ double get_corr(int npairs)
       double phi2 = 0; //same as above, but for particle 2
       if ( phi1 > 0 ) phi2 = phi1 - 3.1415926535;
       if ( phi1 < 0 ) phi2 = phi1 + 3.1415926535;
-      cout << phi1 << " " << phi2 << endl;
-      cout << i << " " << endl;
+      //cout << phi1 << " " << phi2 << endl;
+      //cout << i << " " << endl;
 
       ang.push_back(phi1); //push_back to stack numbers on return
       ang.push_back(phi2);
@@ -48,7 +51,7 @@ double get_corr(int npairs)
 
   for ( int i = 0; i < ang.size(); ++i )
     {
-      cout << ang[i] << " " ;
+      //cout << ang[i] << " " ;
       for(int h=0;h<maxHarmonic;h++)
         {
           double phi = ang[i];
@@ -60,6 +63,49 @@ double get_corr(int npairs)
         } // end of loop over harmonics
     } // end of loop over ang vector
 
-  cout <<endl;
+
+  int nfvtxt = npairs*2;
+  // --- from generic formulas ----------------------------------------------------------------------------
+  //  2-p correlations
+  int harmonics_Two_Num[2] = {2,-2}; // 2, -2
+  int harmonics_Two_Den[2] = {0,0}; // recursion gives the right combinatorics
+  TComplex twoRecursion = Recursion(2,harmonics_Two_Num)/Recursion(2,harmonics_Two_Den).Re();
+  double spwTwoRecursion = Recursion(2,harmonics_Two_Den).Re();
+  double wTwoRecursion = 1.0;
+  nfvtxt_recursion[0][0]->Fill(nfvtxt,twoRecursion.Re(),wTwoRecursion);
+  nfvtxt_recursion[1][0]->Fill(nfvtxt,twoRecursion.Im(),wTwoRecursion);
+  //  4-p correlations
+  int harmonics_Four_Num[4] = {2,2,-2,-2};
+  int harmonics_Four_Den[4] = {0,0,0,0};
+  TComplex fourRecursion = Recursion(4,harmonics_Four_Num)/Recursion(4,harmonics_Four_Den).Re();
+  double spwFourRecursion = Recursion(4,harmonics_Four_Den).Re();
+  double wFourRecursion = 1.0;
+  nfvtxt_recursion[0][2]->Fill(nfvtxt,fourRecursion.Re(),wFourRecursion);
+  nfvtxt_recursion[1][2]->Fill(nfvtxt,fourRecursion.Im(),wFourRecursion);
+  //  6-p correlations:
+  int harmonics_Six_Num[6] = {2,2,2,-2,-2,-2};
+  int harmonics_Six_Den[6] = {0,0,0,0,0,0};
+  TComplex sixRecursion = Recursion(6,harmonics_Six_Num)/Recursion(6,harmonics_Six_Den).Re();
+  double spwSixRecursion = Recursion(6,harmonics_Six_Den).Re();
+  double wSixRecursion = 1.0;
+  nfvtxt_recursion[0][4]->Fill(nfvtxt,sixRecursion.Re(),wSixRecursion);
+  nfvtxt_recursion[1][4]->Fill(nfvtxt,sixRecursion.Im(),wSixRecursion);
+  //  8-p correlations
+  int harmonics_Eight_Num[8] = {2,2,2,2,-2,-2,-2,-2};
+  int harmonics_Eight_Den[8] = {0,0,0,0,0,0,0,0};
+  TComplex eightRecursion = Recursion(8,harmonics_Eight_Num)/Recursion(8,harmonics_Eight_Den).Re();
+  double spwEightRecursion = Recursion(8,harmonics_Eight_Den).Re();
+  double wEightRecursion = 1.0;
+  nfvtxt_recursion[0][6]->Fill(nfvtxt,eightRecursion.Re(),wEightRecursion);
+  nfvtxt_recursion[1][6]->Fill(nfvtxt,eightRecursion.Im(),wEightRecursion);
+
+  // --- print statements for diagnostic purposes
+  cout << twoRecursion.Re() << endl;
+  cout << fourRecursion.Re() << endl;
+  cout << sixRecursion.Re() << endl;
+  cout << eightRecursion.Re() << endl;
+
+  //cout <<endl;
   return 0.0;
+
 }
