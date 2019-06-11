@@ -16,6 +16,8 @@ double get_corr4 (int npairs)
     {
       double phi1 = angle.Uniform(-3.1415926535,3.1415926535);
       double phi2 = 0;
+      double phi3 = 0;
+      double phi4 = 0;
       // --- since phi3 is fixed to phi1, we don't need to call this
       // --- and it saves CPU time to skip it
       // double phi3 = angle.Uniform(-3.1415926535,3.1415926535);
