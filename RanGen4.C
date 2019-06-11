@@ -10,6 +10,20 @@ void RanGen4()
 double get_corr4 (int npairs)
 {
   TRandom3 angle (0);
+
+  static const int maxCorrelator = 12;
+  static const int maxHarmonic = 10;
+  static const int maxPower = 9;
+  TComplex Qvector[maxHarmonic][maxPower];
+
+  for(int h=0;h<maxHarmonic;h++)
+    {
+      for(int w=0;w<maxPower;w++)
+        {
+          Qvector[h][w] = TComplex(0.,0.); // initialize Q-vector to zero                                                
+        } // end of loop over Qvector                                                                                    
+    } // end of loop over maxHarmonic
+
   vector <double> ang;
 
   for (int i = 0; i < npairs; ++i)
@@ -47,6 +61,15 @@ double get_corr4 (int npairs)
   for (int i = 0; i < ang.size (); ++i)
     {
       cout << ang[i] << " " ;
+      for(int h=0;h<maxHarmonic;h++)
+        {
+          double phi = ang[i];
+          // do the summation for the Q-vectors                                                                          
+          for(int w=0;w<maxPower;w++)
+            {
+              Qvector[h][w] += TComplex(cos(h*phi),sin(h*phi));
+            } // end of loop over powers                                                                                 
+        } // end of loop over harmonics  
     }
 
   cout << endl;
