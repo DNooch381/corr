@@ -13,6 +13,39 @@ void RanGen2()
 double get_corr(int npairs)
 {
   TRandom3 angle(0);
+
+  //Dylan TComplex based on shared code
+
+  static const int maxCorrelator = 12;
+  static const int maxHarmonic = 10;
+  static const int maxPower = 9;
+  TComplex Qvector[maxHarmonic][maxPower];
+
+  for(int h=0;h<maxHarmonic;h++)
+    {
+      for(int w=0;w<maxPower;w++)
+	{
+	  Qvector[h][w] = TComplex(0.,0.);
+	}
+    }
+
+  for(int h=0;h<maxHarmonic;h++)
+    {
+      for(int w=0;w<maxPower;w++)
+	{
+	  Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
+	}
+    }
+
+  // Receiving some error messages (see below), but think this may be a bracketing issue? 
+  // errors being found:
+  //  In file included from input_line_10:1:
+  //  /Users/home_dylanantonacci/Corr/RanGen2.C:36:36: error: use of undeclared identifier 'p'
+  //   Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
+                                          ^
+  //   /Users/home_dylanantonacci/Corr/RanGen2.C:36:51: error: use of undeclared identifier 'p'
+  //	Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
+
   vector < double > ang; //inserting the pairs into a single object
 
   // Below is our "for" loop
