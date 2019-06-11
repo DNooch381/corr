@@ -21,19 +21,12 @@ double get_corr(int npairs)
   static const int maxPower = 9;
   TComplex Qvector[maxHarmonic][maxPower];
 
+  // initialize the Q-vectors to zero
   for(int h=0;h<maxHarmonic;h++)
     {
       for(int w=0;w<maxPower;w++)
 	{
 	  Qvector[h][w] = TComplex(0.,0.);
-	}
-    }
-
-  for(int h=0;h<maxHarmonic;h++)
-    {
-      for(int w=0;w<maxPower;w++)
-	{
-	  Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
 	}
     }
 
@@ -46,7 +39,8 @@ double get_corr(int npairs)
   //   /Users/home_dylanantonacci/Corr/RanGen2.C:36:51: error: use of undeclared identifier 'p'
   //	Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
 
-  vector < double > ang; //inserting the pairs into a single object
+  //vector < double > ang; //inserting the pairs into a single object
+   vector <double> ang; //inserting the pairs into a single object
 
   // Below is our "for" loop
   // int = integer, i is the variable that can always be at 0,
@@ -69,7 +63,17 @@ double get_corr(int npairs)
   for ( int i = 0; i < ang.size(); ++i )
     {
       cout << ang[i] << " " ;
-    }
+      for(int h=0;h<maxHarmonic;h++)
+        {
+          double phi = ang[i];
+          // do the summation for the Q-vectors
+          for(int w=0;w<maxPower;w++)
+            {
+              //Qvector[h][w] += TComplex(cos(h*p.phi()),sin(h*p.phi()));
+              Qvector[h][w] += TComplex(cos(h*phi),sin(h*phi));
+            } // end of loop over powers
+        } // end of loop over harmonics
+    } // end of loop over ang vector
   cout <<endl;
   return 0.0;
 }
