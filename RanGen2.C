@@ -1,7 +1,5 @@
 #include "Recursion.C"
 
-//ignore comment
-
 void get_corr(int);
 
 void do_recursion(vector<double>&);
