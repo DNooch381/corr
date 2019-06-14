@@ -7,7 +7,7 @@ void do_recursion(vector<double>&); // start of recursion function
 void RanGen2()
 {
   Init(); // initialize histograms
-  for ( int i = 1; i < 5; ++i )
+  for ( int i = 1; i < 350; ++i )
     {
       get_corr(i);
     }
@@ -120,10 +120,10 @@ void do_recursion(vector<double>& ang)
   hmult_recursion[1][6]->Fill(mult,eightRecursion.Im(),wEightRecursion);
 
   // --- print statements for diagnostic purposes
-  cout << twoRecursion.Re() << endl;
-  cout << fourRecursion.Re() << endl;
-  cout << sixRecursion.Re() << endl;
-  cout << eightRecursion.Re() << endl;
+  //cout << twoRecursion.Re() << endl;
+  //cout << fourRecursion.Re() << endl;
+  //cout << sixRecursion.Re() << endl;
+  //cout << eightRecursion.Re() << endl;
 
 } // end do_recursion function
 
