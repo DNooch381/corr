@@ -5,10 +5,14 @@ double get_corr(int);
 void RanGen2()
 {
   Init(); // initialize histograms
-  double x = get_corr (9); // number of correlations for phi1
-  //cout <<endl;
-  //cout <<endl;
-  double y = get_corr (9); // number of correlations for phi2
+
+  for ( int i = 0; i < 5; ++i )      
+    {
+      double x = get_corr (i);
+      //cout <<endl;
+      //cout <<endl;
+      // double y = get_corr (i); // number of correlations for phi2
+    }
 } //end of void RanGen2()
 
 double get_corr(int npairs)
@@ -48,6 +52,8 @@ double get_corr(int npairs)
       ang.push_back(phi2);
 
     } // end of npairs for loop
+
+  // insert new function for the recursion 
 
   for ( int i = 0; i < ang.size(); ++i )
     {
@@ -104,6 +110,8 @@ double get_corr(int npairs)
   cout << fourRecursion.Re() << endl;
   cout << sixRecursion.Re() << endl;
   cout << eightRecursion.Re() << endl;
+
+  // placeholder to close the recursion function
 
   //cout <<endl;
   return 0.0;
