@@ -14,16 +14,16 @@ void RanGen2()
 
   TFile* HistFile = new TFile("FileOne.root","recreate");
   HistFile->cd();
-
   // --- write recursion histo
-
   for ( int cs = 0; cs < 2; ++cs )
     {
       for(int c = 0; c < maxCorrelator; ++c )
         {
-	  hmult_recursion[cs] [c]->Write();
+	  hmult_recursion[cs][c]->Write();
         }
     }
+  HistFile->Write();
+  delete HistFile;
 } //end of void RanGen2()
 
 void get_corr(int npairs)
