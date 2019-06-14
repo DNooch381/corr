@@ -1,36 +1,26 @@
 #include "Recursion.C"
 
-double get_corr(int);
+void get_corr(int);
+
+void do_recursion(vector<double>&);
+
+
 
 void RanGen2()
 {
   Init(); // initialize histograms
-
-  for ( int i = 0; i < 5; ++i )      
+  for ( int i = 1; i < 5; ++i )
     {
-      double x = get_corr (i);
-      //cout <<endl;
-      //cout <<endl;
-      //double y = get_corr (i); // number of correlations for phi2
+      get_corr(i);
     }
 } //end of void RanGen2()
 
-double get_corr(int npairs)
+
+
+void get_corr(int npairs)
 {
+
   TRandom3 angle(0);
-
-  // static const int maxCorrelator = 12;
-  // static const int maxHarmonic = 10;
-  // static const int maxPower = 9;
-  // TComplex Qvector[maxHarmonic][maxPower];
-
-  for(int h=0;h<maxHarmonic;h++)
-    {
-      for(int w=0;w<maxPower;w++)
-        {
-          Qvector[h][w] = TComplex(0.,0.); // initialize Q-vector to zero
-        } // end of loop over Qvector
-    } // end of loop over maxHarmonic
 
   vector <double> ang; // inserting pairs into single object
 
@@ -53,9 +43,28 @@ double get_corr(int npairs)
 
     } // end of npairs for loop
 
-  int rec ( 0 );
-  {
-  for ( int i = 0; i < ang.size(); ++i )
+  do_recursion(ang);
+
+  return;
+
+}
+
+
+
+void do_recursion(vector<double>& ang)
+{
+
+  for(int h=0;h<maxHarmonic;h++)
+    {
+      for(int w=0;w<maxPower;w++)
+        {
+          Qvector[h][w] = TComplex(0.,0.); // initialize Q-vector to zero
+        } // end of loop over Qvector
+    } // end of loop over maxHarmonic
+
+  int nfvtxt = ang.size();
+
+  for ( int i = 0; i < nfvtxt; ++i )
     {
       //cout << ang[i] << " " ;
       for(int h=0;h<maxHarmonic;h++)
@@ -69,8 +78,6 @@ double get_corr(int npairs)
         } // end of loop over harmonics
     } // end of loop over ang vector
 
-
-  int nfvtxt = npairs*2;
   // --- from generic formulas ----------------------------------------------------------------------------
   //  2-p correlations
   int harmonics_Two_Num[2] = {2,-2}; // 2, -2
@@ -111,9 +118,5 @@ double get_corr(int npairs)
   cout << sixRecursion.Re() << endl;
   cout << eightRecursion.Re() << endl;
 
-  } // end recursion function
+} // end do_recursion function
 
-  //cout <<endl;
-  return 0.0;
-
-}
