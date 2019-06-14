@@ -36,3 +36,20 @@ void HisT()
   return;
 
 }
+
+//Tfile for I/O stuff
+//TFile* HistFile = new TFile("FileOne.root","recreate");
+//HistFile->cd();
+//heta->Write();
+//heta_vec->Write();
+//hPhi->Write();
+//hPhi_vec->Write();
+//tp1f_c22mult->Write();
+// --- write the recursion histograms
+//for ( int cs = 0; cs < 2; ++cs )
+//{
+//for(int c = 0; c < maxCorrelator; ++c )
+//{
+//hmult_recursion[cs][c]->Write();
+//}
+//}
