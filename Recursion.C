@@ -3,7 +3,7 @@ const int maxHarmonic = 10;
 const int maxPower = 9;
 TComplex Qvector[maxHarmonic][maxPower];
 
-TProfile* nfvtxt_recursion[2][maxCorrelator];
+TProfile* hmult_recursion[2][maxCorrelator];
 
 TComplex Q(int, int);
 TComplex Recursion(int, int*);
@@ -68,7 +68,7 @@ void Init()
     {
       for(int c = 0; c < maxCorrelator; ++c )
         {
-          nfvtxt_recursion[cs][c] = new TProfile(Form("nfvtxt_recursion_%d_%d",cs,c),"",700,-0.5,699.5,-1.1,1.1);
+          hmult_recursion[cs][c] = new TProfile(Form("hmult_recursion_%d_%d",cs,c),"",700,-0.5,699.5,-1.1,1.1);
         }
     }
 }
