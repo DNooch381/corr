@@ -53,9 +53,7 @@ double get_corr(int npairs)
 
     } // end of npairs for loop
 
-  // insert new function for the recursion 
-
-  int recur ( 0 );
+  int rec ( 0 );
   {
   for ( int i = 0; i < ang.size(); ++i )
     {
@@ -113,7 +111,7 @@ double get_corr(int npairs)
   cout << sixRecursion.Re() << endl;
   cout << eightRecursion.Re() << endl;
 
-  } // placeholder to close the recursion function
+  } // end recursion function
 
   //cout <<endl;
   return 0.0;
