@@ -11,7 +11,7 @@ void RanGen2()
       double x = get_corr (i);
       //cout <<endl;
       //cout <<endl;
-      // double y = get_corr (i); // number of correlations for phi2
+      //double y = get_corr (i); // number of correlations for phi2
     }
 } //end of void RanGen2()
 
@@ -55,6 +55,8 @@ double get_corr(int npairs)
 
   // insert new function for the recursion 
 
+  int recur ( 0 );
+  {
   for ( int i = 0; i < ang.size(); ++i )
     {
       //cout << ang[i] << " " ;
@@ -111,7 +113,7 @@ double get_corr(int npairs)
   cout << sixRecursion.Re() << endl;
   cout << eightRecursion.Re() << endl;
 
-  // placeholder to close the recursion function
+  } // placeholder to close the recursion function
 
   //cout <<endl;
   return 0.0;
