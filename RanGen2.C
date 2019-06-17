@@ -1,16 +1,17 @@
 #include "Recursion.C"
 
 //6.17.19 Run Time for J = 1000:  14m 16s
+//6.17.19 Run Time for J = 10,000: 2hr 21m 16s  
 
 void get_corr(int);
 
 void do_recursion(vector<double>&); // start of recursion function
 
-void RanGen2()
-{
+void RanGen2()  
+{  
   Init(); // initialize histograms
 
-  for ( int j = 0; j < 1000; ++j )
+  for ( int j = 0; j < 10000; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < 350; ++i )
@@ -31,6 +32,7 @@ void RanGen2()
     }
   HistFile->Write();
   delete HistFile;
+
 } //end of void RanGen2()
 
 void get_corr(int npairs)
@@ -132,5 +134,4 @@ void do_recursion(vector<double>& ang)
   //cout << sixRecursion.Re() << endl;
   //cout << eightRecursion.Re() << endl;
 
-} // end do_recursion function
-
+} // end do_recursion functios
