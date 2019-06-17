@@ -1,6 +1,6 @@
 #include "Recursion.C"
 
-//test push
+//6.17.19 Run Time for J = 1000:  14m 16s
 
 void get_corr(int);
 
@@ -10,7 +10,7 @@ void RanGen2()
 {
   Init(); // initialize histograms
 
-  for ( int j = 0; j < 20; ++j )
+  for ( int j = 0; j < 1000; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < 350; ++i )
