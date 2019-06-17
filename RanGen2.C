@@ -1,6 +1,6 @@
 #include "Recursion.C"
 
-//test push
+//6.17.19 Run Time for J = 1000:  14m 16s
 
 void get_corr(int);
 
