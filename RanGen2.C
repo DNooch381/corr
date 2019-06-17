@@ -1,4 +1,5 @@
 #include "Recursion.C"
+#include <sys/time.h>
 
 //6.17.19 Run Time for J = 1000:  14m 16s
 //6.17.19 Run Time for J = 10,000: 2hr 21m 16s  
@@ -6,12 +7,19 @@
 void get_corr(int);
 
 void do_recursion(vector<double>&); // start of recursion function
-
+   
 void RanGen2()  
 {  
+
+  struct timeval Time;
+
+  gettimeofday(&Time,0);
+  int begintime = Time.tv_sec;
+  //cout<<"begintime is "<<begintime<<endl;
+
   Init(); // initialize histograms
 
-  for ( int j = 0; j < 10000; ++j )
+  for ( int j = 0; j < 30; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < 350; ++i )
@@ -32,6 +40,15 @@ void RanGen2()
     }
   HistFile->Write();
   delete HistFile;
+
+  gettimeofday(&Time,0);
+  int endtime = Time.tv_sec;
+  //cout<<"endtime is "<<endtime<<endl;
+
+  int tdiff = endtime-begintime;
+
+  cout<<"End of program."<<endl;
+  cout<<"Execution time: "<<tdiff<<" seconds"<<endl;
 
 } //end of void RanGen2()
 
@@ -65,7 +82,7 @@ void get_corr(int npairs)
 
   return;
 
-}
+} //end of get_corr
 
 void do_recursion(vector<double>& ang)
 {
@@ -134,4 +151,4 @@ void do_recursion(vector<double>& ang)
   //cout << sixRecursion.Re() << endl;
   //cout << eightRecursion.Re() << endl;
 
-} // end do_recursion functios
+} // end do_recursion functions
