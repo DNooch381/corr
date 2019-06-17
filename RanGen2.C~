@@ -7,14 +7,9 @@ void do_recursion(vector<double>&); // start of recursion function
 void RanGen2()
 {
   Init(); // initialize histograms
- 
-  for ( int j = 0; j < 2; ++j )
+  for ( int i = 1; i < 350; ++i )
     {
-
-      for ( int i = 1; i < 350; ++i )
-	{
-	  get_corr(i);
-	}
+      get_corr(i);
     }
 
   TFile* HistFile = new TFile("FileOne.root","recreate");
