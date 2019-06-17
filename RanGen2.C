@@ -9,10 +9,10 @@ void do_recursion(vector<double>&); // start of recursion function
 void RanGen2()
 {
   Init(); // initialize histograms
- 
-  for ( int j = 0; j < 2; ++j )
-    {
 
+  for ( int j = 0; j < 20; ++j )
+    {
+      if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < 350; ++i )
 	{
 	  get_corr(i);
