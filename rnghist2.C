@@ -4,7 +4,7 @@ void rnghist2()
   TFile* HistFile = new TFile("FileTwo.root","read");
   TProfile* histogram = (TProfile*)HistFile->Get("hmult_recursion_0_0");
   TCanvas* c1 = new TCanvas("c1","",800,600);
-  TF1* fun = new TF1("fun","[0]/(x-1)",1.9, 500);
+  TF1* fun = new TF1("fun","[0]/(x-1)",1.9, 500); //includes combinatoric function for 2 particle correlations
 
   histogram->Fit(fun,"R");
   c1->Print("histogram_fit_500logylogx.png");
