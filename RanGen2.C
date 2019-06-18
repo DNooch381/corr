@@ -2,14 +2,16 @@
 #include <sys/time.h>
 
 //6.17.19 Run Time for J = 1000:  14m 16s
-//6.17.19 Run Time for J = 10,000: 2hr 21m 16s  
+//6.17.19 Run Time for J = 10,000: 2hr 21m 16s
 
 void get_corr(int);
 
 void do_recursion(vector<double>&); // start of recursion function
-   
-void RanGen2()  
-{  
+
+
+
+void RanGen2()
+{
 
   struct timeval Time;
 
@@ -52,6 +54,8 @@ void RanGen2()
 
 } //end of void RanGen2()
 
+
+
 void get_corr(int npairs)
 {
 
@@ -83,6 +87,8 @@ void get_corr(int npairs)
   return;
 
 } //end of get_corr
+
+
 
 void do_recursion(vector<double>& ang)
 {
