@@ -4,6 +4,7 @@ void rnghist2()
   TFile* HistFile = new TFile("FileTwo.root","read");
   TProfile* histogram = (TProfile*)HistFile->Get("hmult_recursion_0_0");
   TCanvas* c1 = new TCanvas("c1","",800,600);
+  TF1* fun = new TF1("fun","[0]/(x-1)",1.9, 500);
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->Draw();
