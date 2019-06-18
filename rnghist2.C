@@ -1,8 +1,7 @@
-
 void rnghist2()
 {
 
-  TFile* HistFile = new TFile("FileOne.root","read");
+  TFile* HistFile = new TFile("FileTwo.root","read");
   TProfile* histogram = (TProfile*)HistFile->Get("hmult_recursion_0_0");
   TCanvas* c1 = new TCanvas("c1","",800,600);
 
@@ -22,4 +21,5 @@ void rnghist2()
   histogram->Draw();
   c1->Print("histogram_500logylogx.png");
 
-} //end of rnghist2 
+} //end of rnghist2
+
