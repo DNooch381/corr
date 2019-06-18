@@ -1,0 +1,25 @@
+
+void rnghist2()
+{
+
+  TFile* HistFile = new TFile("FileOne.root","read");
+  TProfile* histogram = (TProfile*)HistFile->Get("hmult_recursion_0_0");
+  TCanvas* c1 = new TCanvas("c1","",800,600);
+
+  histogram->GetXaxis()->SetRangeUser(0,20);
+  histogram->Draw();
+  c1->Print("histogram_20.png");
+
+  histogram->GetXaxis()->SetRangeUser(0,500);
+  histogram->Draw();
+  c1->Print("histogram_500.png");
+
+  c1->SetLogy();
+  histogram->Draw();
+  c1->Print("histogram_500logy.png");
+
+  c1->SetLogx();
+  histogram->Draw();
+  c1->Print("histogram_500logylogx.png");
+
+} //end of rnghist2 
