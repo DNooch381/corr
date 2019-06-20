@@ -60,23 +60,37 @@ void get_corr(int npairs)
   // i < 100 means go up to 100 events, ++i checks if it's less
   // than 100 and adds 1 -- if more than 100, than the program stops
 
-  for ( int i = 0; i < npairs; ++i )
+  for (int i = 0; i < npairs; ++i)
     {
-      //double means an exact number, phi1 is the name of the double for particle 1.
       double phi1 = angle.Uniform(-3.1415926535,3.1415926535);
-      double phi2 = 0; //same as above, but for particle 2
+      double phi2 = 0;
+      double phi3 = 0;
+      double phi4 = 0;
+      // --- since phi3 is fixed to phi1, we don't need to call this
+      // --- and it saves CPU time to skip it
+      // double phi3 = angle.Uniform(-3.1415926535,3.1415926535);
+      // double phi4 = 0;
+
       if ( phi1 > 0 ) phi2 = phi1 - 3.1415926535;
       if ( phi1 < 0 ) phi2 = phi1 + 3.1415926535;
-      //cout << phi1 << " " << phi2 << endl;
-      //cout << i << " " << endl;
+      if ( phi1 > 0 ) phi3 = phi1 - 0.1;
+      if ( phi1 < 0 ) phi3 = phi1 + 0.1;
+      // --- we want phi4 to be anchored to phi3 and offset by pi
+      if ( phi3 > 0 ) phi4 = phi3 - 3.1415926535;
+      if ( phi3 < 0 ) phi4 = phi3 + 3.1415926535;
 
-      ang.push_back(phi1); //push_back to stack numbers on return
-      ang.push_back(phi2);
+      cout << phi1 << " " << phi2 << endl;
+      cout << phi3 << " " << phi4 << endl;
+      cout << i << " " << endl;
 
-    } // end of npairs for loop
+      ang.push_back (phi1);
+      ang.push_back (phi2);
+      cout << " " << endl;
 
-  do_recursion(ang);
-
+      ang.push_back (phi3);
+      ang.push_back (phi4);
+      cout << " " << endl;
+    }
   return;
 
 } //end of get_corr
