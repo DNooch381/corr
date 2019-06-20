@@ -16,7 +16,7 @@ void RanGen4()
 
   Init(); // initialize histograms
 
-  for ( int j = 0; j < 30; ++j )
+  for ( int j = 0; j < 10000; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < 175; ++i )
