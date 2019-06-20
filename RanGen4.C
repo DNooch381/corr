@@ -49,7 +49,7 @@ void RanGen4()
 
 } //end of void RanGen2()
 
-void get_corr(int npairs)
+void get_corr(int ntuples)
 {
 
   TRandom3 angle(0);
@@ -60,7 +60,7 @@ void get_corr(int npairs)
   // i < 100 means go up to 100 events, ++i checks if it's less
   // than 100 and adds 1 -- if more than 100, than the program stops
 
-  for (int i = 0; i < npairs; ++i)
+  for ( int i = 0; i < ntuples; ++i )
     {
       double phi1 = angle.Uniform(-3.1415926535,3.1415926535);
       double phi2 = 0;
