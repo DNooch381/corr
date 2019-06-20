@@ -16,11 +16,11 @@ void rnghist2()
   histogram->Draw();
   c1->Print("histogram_500_10.png");
 
-  c1->SetLogy();
+  c1->SetLogy(0);
   histogram->Draw();
   c1->Print("histogram_500logy_10.png");
 
-  c1->SetLogx();
+  c1->SetLogx(0);
   histogram->Draw();
   c1->Print("histogram_500logylogx_10.png");
 
