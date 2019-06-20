@@ -1,16 +1,11 @@
 #include "Recursion.C"
 #include <sys/time.h>
 
-//6.17.19 Run Time for J = 1000:  14m 16s
-//6.17.19 Run Time for J = 10,000: 2hr 21m 16s
-
 void get_corr(int);
 
 void do_recursion(vector<double>&); // start of recursion function
 
-
-
-void RanGen2()
+void RanGen4()
 {
 
   struct timeval Time;
@@ -24,13 +19,13 @@ void RanGen2()
   for ( int j = 0; j < 30; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
-      for ( int i = 1; i < 350; ++i )
+      for ( int i = 1; i < 175; ++i )
 	{
 	  get_corr(i);
 	}
     }
 
-  TFile* HistFile = new TFile("FileOne.root","recreate");
+  TFile* HistFile = new TFile("FileFour.root","recreate");
   HistFile->cd();
   // --- write recursion histo
   for ( int cs = 0; cs < 2; ++cs )
