@@ -49,8 +49,6 @@ void RanGen4()
 
 } //end of void RanGen2()
 
-
-
 void get_corr(int npairs)
 {
 
