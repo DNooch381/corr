@@ -79,18 +79,21 @@ void get_corr(int ntuples)
       if ( phi3 > 0 ) phi4 = phi3 - 3.1415926535;
       if ( phi3 < 0 ) phi4 = phi3 + 3.1415926535;
 
-      cout << phi1 << " " << phi2 << endl;
-      cout << phi3 << " " << phi4 << endl;
-      cout << i << " " << endl;
+      // cout << phi1 << " " << phi2 << endl;
+      // cout << phi3 << " " << phi4 << endl;
+      // cout << i << " " << endl;
 
       ang.push_back (phi1);
       ang.push_back (phi2);
-      cout << " " << endl;
+      // cout << " " << endl;
 
       ang.push_back (phi3);
       ang.push_back (phi4);
-      cout << " " << endl;
+      // cout << " " << endl;
     }
+
+  do_recursion(ang);
+
   return;
 
 } //end of get_corr
