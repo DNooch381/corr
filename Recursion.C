@@ -73,3 +73,14 @@ void Init()
     }
 }
 
+void Delete()
+{
+  for ( int cs = 0; cs < 2; ++cs )
+    {
+      for(int c = 0; c < maxCorrelator; ++c )
+        {
+          delete hmult_recursion[cs][c];
+        }
+    }
+}
+

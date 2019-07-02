@@ -13,6 +13,7 @@ void RanGenX()
 {
 
   execute(20,700,2);
+  execute(20,700,4);
 
 }
 
@@ -50,6 +51,8 @@ void execute(int sequences, int nparticles, int ntuple)
     }
   HistFile->Write();
   delete HistFile;
+
+  Delete(); // delete histograms
 
   gettimeofday(&Time,0);
   int endtime = Time.tv_sec;
