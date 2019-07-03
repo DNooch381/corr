@@ -1,23 +1,34 @@
 #include "Recursion.C"
 #include <sys/time.h>
 
-void get_corr(int,int);
+// --- correlation function (generates particles, calls recursion)
+void get_corr(int,int,double); // primary
+void get_corr(int,int); // calls primary with a default
 
-void get_corr(int,int,double);
+// --- recursion function (uses vector of angles to do calculations)
+void do_recursion(vector<double>&);
 
-void do_recursion(vector<double>&); // start of recursion function
-
-void execute(int,int,int);
+// --- gets system time, executes get_corr inside of over sequences/events
+void execute(int,int,int,double); // primary
+void execute(int,int,int); // calls primary with a default
 
 void RanGenX()
 {
-
-  execute(20,700,2);
-  execute(20,700,4);
+  int howmany = 20;
+  double space = 0.1; // default space between correlated ntuples...
+  execute(howmany,700,2,space);
+  execute(howmany,700,4,space);
+  execute(howmany,700,6,space);
+  execute(howmany,700,8,space);
 
 }
 
 void execute(int sequences, int nparticles, int ntuple)
+{
+  execute(sequences,nparticles,ntuple,0.1);
+}
+
+void execute(int sequences, int nparticles, int ntuple, double space)
 {
 
   int stop = nparticles/ntuple;
@@ -30,15 +41,17 @@ void execute(int sequences, int nparticles, int ntuple)
 
   Init(); // initialize histograms
 
+  // --- generate the correlations
   for ( int j = 0; j < sequences; ++j )
     {
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < stop; ++i )
 	{
-	  get_corr(i,ntuple);
+	  get_corr(i,ntuple,space);
 	}
     }
 
+  //--- make an output file to write the histograms
   TFile* HistFile = new TFile(Form("OutFile_%d.root",ntuple),"recreate");
   HistFile->cd();
   // --- write recursion histo
