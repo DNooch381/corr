@@ -51,8 +51,22 @@ void execute(int sequences, int nparticles, int ntuple, double space)
 	}
     }
 
+  // --- Use a time struct to get the current date and time to append to the output file names
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+
+  char timestamp[100];
+  char daypart[100];
+  char timepart[100];
+
+  printf("now: %02d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(timepart,"%02d%02d", tm.tm_hour, tm.tm_min);
+  sprintf(daypart,"%02d%02d%02d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
+  sprintf(timestamp,"%s-%s",daypart,timepart);
+  cout<<"time stamp is "<<timestamp<<endl;
+
   //--- make an output file to write the histograms
-  TFile* HistFile = new TFile(Form("OutFile_%d.root",ntuple),"recreate");
+  TFile* HistFile = new TFile(Form("OutFile_k%d_%s.root",ntuple,timestamp),"recreate");
   HistFile->cd();
   // --- write recursion histo
   for ( int cs = 0; cs < 2; ++cs )
