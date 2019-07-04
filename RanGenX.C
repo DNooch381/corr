@@ -66,7 +66,7 @@ void execute(int sequences, int nparticles, int ntuple, double space)
   cout<<"time stamp is "<<timestamp<<endl;
 
   //--- make an output file to write the histograms
-  TFile* HistFile = new TFile(Form("OutFile_k%d_%s.root",ntuple,timestamp),"recreate");
+  TFile* HistFile = new TFile(Form("OutputFiles/OutFile_k%d_%s.root",ntuple,timestamp),"recreate");
   HistFile->cd();
   // --- write recursion histo
   for ( int cs = 0; cs < 2; ++cs )
