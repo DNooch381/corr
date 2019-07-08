@@ -61,4 +61,6 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   histogram->Draw();
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
+  delete c1;
+
 } //end of rnghist2
