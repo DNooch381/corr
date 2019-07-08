@@ -14,7 +14,7 @@ void execute(int,int,int); // calls primary with a default
 
 void RanGenX()
 {
-  int howmany = 20;
+  int howmany = 0;
   double space = 0.1; // default space between correlated ntuples...
   execute(howmany,700,2,space);
   execute(howmany,700,4,space);
@@ -66,7 +66,7 @@ void execute(int sequences, int nparticles, int ntuple, double space)
   cout<<"time stamp is "<<timestamp<<endl;
 
   //--- make an output file to write the histograms
-  TFile* HistFile = new TFile(Form("OutputFiles/OutFile_k%d_%s.root",ntuple,timestamp),"recreate");
+  TFile* HistFile = new TFile(Form("OutputFiles/OutFile_%s_k%d.root",timestamp,ntuple),"recreate");
   HistFile->cd();
   // --- write recursion histo
   for ( int cs = 0; cs < 2; ++cs )
