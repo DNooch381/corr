@@ -1,7 +1,7 @@
 void rnghist2()
 {
 
-  TFile* HistFile = new TFile("FileTwo.root","read");
+  TFile* HistFile = new TFile("OutputFiles/OutFile_k2.root","read");
   TProfile* histogram = (TProfile*)HistFile->Get("hmult_recursion_0_0");
 
   TCanvas* c1 = new TCanvas("c1","",800,600);
