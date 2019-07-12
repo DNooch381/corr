@@ -39,6 +39,9 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   histogram->GetYaxis()->SetTitle("c_{2}{2}");
   histogram->GetXaxis()->SetTitle("Number of particles");
   histogram->GetXaxis()->SetRangeUser(0,20);
+  histogram->SetMarkerStyle(kFullCircle);
+  histogram->SetMarkerColor(kBlack);
+  histogram->SetLineColor(kBlack);
   histogram->Draw();
   c1->Print(Form("Figures/histogram%s_20.png",handle));
 
