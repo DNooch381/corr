@@ -19,15 +19,15 @@ void rnghistX()
   // char handle44[40] = "44";
   // plotfit(histogram44,fun4,handle44);
 
-  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
-  TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
-  char handle4[40] = "6";
-  plotfit(histogram4,fun2,handle4);
+  TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
+  TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
+  char handle6[60] = "6";
+  plotfit(histogram4,fun2,handle6);
 
-  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
-  TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
-  char handle4[40] = "8";
-  plotfit(histogram4,fun2,handle4);
+  TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
+  TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_0");
+  char handle8[80] = "8";
+  plotfit(histogram4,fun2,handle8);
 
 }
 
