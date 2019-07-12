@@ -14,10 +14,20 @@ void rnghistX()
   char handle4[40] = "4";
   plotfit(histogram4,fun2,handle4);
 
-  TProfile* histogram44 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
-  TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
-  char handle44[40] = "44";
-  plotfit(histogram44,fun4,handle44);
+  // TProfile* histogram44 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
+  // TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
+  // char handle44[40] = "44";
+  // plotfit(histogram44,fun4,handle44);
+
+  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
+  TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
+  char handle4[40] = "6";
+  plotfit(histogram4,fun2,handle4);
+
+  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
+  TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
+  char handle4[40] = "8";
+  plotfit(histogram4,fun2,handle4);
 
 }
 
