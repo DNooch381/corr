@@ -22,12 +22,12 @@ void rnghistX()
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
   char handle6[60] = "6";
-  plotfit(histogram4,fun2,handle6);
+  plotfit(histogram6,fun2,handle6);
 
   TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
   TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_0");
   char handle8[80] = "8";
-  plotfit(histogram4,fun2,handle8);
+  plotfit(histogram8,fun2,handle8);
 
 }
 
