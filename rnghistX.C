@@ -62,6 +62,8 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   histogram->Fit(fun,"R");
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
+  // --- insert LTatex code blocks here
+
   c1->SetLogx(0);
   histogram->Draw();
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
