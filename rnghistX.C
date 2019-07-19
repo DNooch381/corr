@@ -43,37 +43,46 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   histogram->SetMarkerColor(kBlack);
   histogram->SetLineColor(kBlack);
   histogram->Draw();
+  // --- insert LTatex code blocks here
+  TLatex* tex = new TLatex();
+  tex->SetNDC();
+  double xtex = 0.2;
+  double ytex = 0.8;
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_20.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,500);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_500.png",handle));
 
   c1->SetLogy(1);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_500logy.png",handle));
 
   c1->SetLogx(1);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_500logylogx.png",handle));
 
   // --- redraw the same histograms above but with the fit
 
   histogram->Fit(fun,"R");
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
-
-  // --- insert LTatex code blocks here
-
   c1->SetLogx(0);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
 
   c1->SetLogy(0);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->Draw();
+  tex->DrawLatex(xtex,ytex,"this is text");
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
   delete c1;
