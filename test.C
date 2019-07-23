@@ -20,17 +20,18 @@ void test()
   ytex = 0.9;
   tex->DrawLatex(xtex,ytex,"this is more text");
 
+  // ---------------------------------------------------------------
   // now for the hard part
   double par = fun->GetParameter(0);
   double epar = fun->GetParError(0);
   double chi2 = fun->GetChisquare();
   int ndf = fun->GetNDF();
-
   xtex = 0.3;
   ytex = 0.4;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.3;
   ytex = 0.3;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  // ---------------------------------------------------------------
 
 }
