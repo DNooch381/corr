@@ -48,22 +48,22 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   tex->SetNDC();
   double xtex = 0.2;
   double ytex = 0.8;
-  tex->DrawLatex(xtex,ytex,"20");
+  //tex->DrawLatex(xtex,ytex,"20");
   c1->Print(Form("Figures/histogram%s_20.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,500);
   histogram->Draw();
-  tex->DrawLatex(xtex,ytex,"500");
+  //tex->DrawLatex(xtex,ytex,"500");
   c1->Print(Form("Figures/histogram%s_500.png",handle));
 
   c1->SetLogy(1);
   histogram->Draw();
-  tex->DrawLatex(xtex,ytex,"500logy");
+  //tex->DrawLatex(xtex,ytex,"500logy");
   c1->Print(Form("Figures/histogram%s_500logy.png",handle));
 
   c1->SetLogx(1);
   histogram->Draw();
-  tex->DrawLatex(xtex,ytex,"500logx/y");
+  //tex->DrawLatex(xtex,ytex,"500logx/y");
   c1->Print(Form("Figures/histogram%s_500logylogx.png",handle));
 
   // --- redraw the same histograms above but with the fit
@@ -80,7 +80,7 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   ytex = 0.3;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
- 
+
   c1->SetLogx(0);
   histogram->Draw();
   xtex = 0.3;
