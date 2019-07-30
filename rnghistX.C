@@ -74,10 +74,10 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   double chi2 = fun->GetChisquare();
   int ndf = fun->GetNDF();
   xtex = 0.57;
-  ytex = 0.53;
+  ytex = 0.56;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
-  ytex = 0.60;
+  ytex = 0.63;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
