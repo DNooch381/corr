@@ -76,8 +76,8 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.3;
   ytex = 0.4;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.3;
-  ytex = 0.3;
+  xtex = 0.55;
+  ytex = 0.55;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
@@ -86,8 +86,8 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.3;
   ytex = 0.4;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.3;
-  ytex = 0.3;
+  xtex = 0.55;
+  ytex = 0.55;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
 
@@ -96,8 +96,8 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.3;
   ytex = 0.4;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.3;
-  ytex = 0.3;
+  xtex = 0.55;
+  ytex = 0.55;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
 
@@ -106,8 +106,8 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.3;
   ytex = 0.4;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.3;
-  ytex = 0.3;
+  xtex = 0.55;
+  ytex = 0.55;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
