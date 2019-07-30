@@ -73,41 +73,40 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   double epar = fun->GetParError(0);
   double chi2 = fun->GetChisquare();
   int ndf = fun->GetNDF();
-  xtex = 0.3;
-  ytex = 0.4;
+  xtex = 0.57;
+  ytex = 0.53;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.55;
-  ytex = 0.55;
+  xtex = 0.57;
+  ytex = 0.60;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
   c1->SetLogx(0);
   histogram->Draw();
-  xtex = 0.3;
-  ytex = 0.4;
+  xtex = 0.57;
+  ytex = 0.53;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.55;
-  ytex = 0.55;
+  xtex = 0.57;
+  ytex = 0.60;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
 
   c1->SetLogy(0);
   histogram->Draw();
-  xtex = 0.3;
-  ytex = 0.4;
+  xtex = 0.57;
+  ytex = 0.53;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.55;
-  ytex = 0.55;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
+  xtex = 0.57;
+  ytex = 0.60;
+  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->Draw();
-  xtex = 0.3;
-  ytex = 0.4;
+  xtex = 0.57;
+  ytex = 0.53;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.55;
-  ytex = 0.55;
+  xtex = 0.57;
+  ytex = 0.60;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
