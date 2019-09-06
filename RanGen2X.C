@@ -1,5 +1,7 @@
-OB#include "Recursion.C"
+#include "Recursion.C"
 #include <sys/time.h>
+
+const double pi = 3.14159265358979;
 
 // --- correlation function (generates particles, calls recursion)
 void get_corr(int,int,double); // primary
@@ -12,7 +14,7 @@ void do_recursion(vector<double>&);
 void execute(int,int,int,double); // primary
 void execute(int,int,int); // calls primary with a default
 
-void RanGenX()
+void RanGen2X()
 {
   int howmany = 0;
   double space = 0.1; // default space between correlated ntuples...
