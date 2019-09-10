@@ -13,7 +13,7 @@ void rnghist2X()
   TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
   char handle4[40] = "2X_4";
   plotfit(histogram4,fun2,handle4);
- 
+
   TFile* HistFile6 = new TFile("OutputFiles/OutFile2X_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_4");
   char handle6[60] = "2X_6";
