@@ -6,7 +6,8 @@ void rnghistXR()
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
   TProfile* histogram2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
   //TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500);
-  TF1* fun2 = new TF1("fun2","[0]/x",50, 500);
+  TF1* fun2 = new TF1("fun2","[0]/x",2, 500);
+  fun2->FixParameter(0,1.0);
   char handle2[20] = "2";
   plotfit(histogram2,fun2,handle2);
 
@@ -14,8 +15,8 @@ void rnghistXR()
   TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
   char handle4[40] = "4";
   // TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
-  TF1* fun4 = new TF1("fun4","[0]/(pow(x,[1]))",50, 500);
-  fun4->SetParameter(0,1.0);
+  TF1* fun4 = new TF1("fun4","[0]/(pow(x,[1]))",4, 500);
+  fun4->FixParameter(0,17.0);
   fun4->FixParameter(1,2.0);
   plotfit(histogram4,fun4,handle4);
 
@@ -24,8 +25,8 @@ void rnghistXR()
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_4");
   char handle6[60] = "6";
-  TF1* fun6 = new TF1("fun6","[0]/(pow(x,[1]))",50, 500);
-  fun6->SetParameter(0,1.0);
+  TF1* fun6 = new TF1("fun6","[0]/(pow(x,[1]))",6, 500);
+  fun6->FixParameter(0,675.0);
   fun6->FixParameter(1,3.0);
   plotfit(histogram6,fun6,handle6);
 
@@ -34,8 +35,8 @@ void rnghistXR()
   TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
   TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_6");
   char handle8[80] = "8";
-  TF1* fun8 = new TF1("fun8","[0]/(pow(x,[1]))",50, 500);
-  fun8->SetParameter(0,1.0);
+  TF1* fun8 = new TF1("fun8","[0]/(pow(x,[1]))",8, 500);
+  fun8->FixParameter(0,43000.0);
   fun8->FixParameter(1,4.0);
   plotfit(histogram8,fun8,handle8);
 
