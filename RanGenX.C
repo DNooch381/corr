@@ -14,7 +14,7 @@ void execute(int,int,int); // calls primary with a default
 
 void RanGenX()
 {
-  int howmany = 0;
+  int howmany = 10;
   double space = 0.1; // default space between correlated ntuples...
   execute(howmany,700,2,space);
   execute(howmany,700,4,space);
@@ -227,6 +227,7 @@ void do_recursion(vector<double>& ang)
   TComplex eightRecursion = Recursion(8,harmonics_Eight_Num)/Recursion(8,harmonics_Eight_Den).Re();
   double spwEightRecursion = Recursion(8,harmonics_Eight_Den).Re();
   double wEightRecursion = 1.0;
+  cout << "here i am " << mult << " " << eightRecursion.Re() <<  endl;
   hmult_recursion[0][6]->Fill(mult,eightRecursion.Re(),wEightRecursion);
   hmult_recursion[1][6]->Fill(mult,eightRecursion.Im(),wEightRecursion);
 
