@@ -16,7 +16,7 @@ void execute(int,int,int); // calls primary with a default
 
 void RanGen2X()
 {
-  int howmany = 100;
+  int howmany = 10;
   double space = 0.1; // default space between correlated ntuples...
   //  execute(howmany,700,2,pi);
   // execute(howmany,700,4,pi/2);
@@ -240,4 +240,3 @@ void do_recursion(vector<double>& ang)
   //cout << eightRecursion.Re() << endl;
 
 } // end do_recursion functions
-
