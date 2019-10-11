@@ -16,7 +16,8 @@ void drawpc()
   c1->Print("pure_comb_8.png");
 
   TF1* fun1 = new TF1("fun1","[0]/pow(x,7)",7.0,99.9);
-  fun1->SetParameter(0,7000); // guess
+  fun1->SetParameter(0,5040); // asymptotic behavior from combinatorics (7!)
+  fun1->SetParameter(0,7000); // that makes it work a little better
   TF1* fun2 = new TF1("fun2","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7))",7.0,99.9);
   fun2->SetParameter(0,5040); // combinatorics suggests 7!
   fun2->SetLineColor(kBlue);
