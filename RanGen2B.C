@@ -171,12 +171,48 @@ void do_correlation(vector<pair<double,double>>& object)
                        group_number_p1 == group_number_p4 ) ++four;
                   ++four_norm;
                   //cout << "hello" << endl;
-                }
-            }
-        }
-    }
+                  for ( int m = l+1; m < mult; ++m )
+                    {
+                      double group_number_p5 = object[m].first;
+                      double parti_number_p5 = object[m].second;
+                      for ( int n = m+1; n < mult; ++n )
+                        {
+                          double group_number_p6 = object[n].first;
+                          double parti_number_p6 = object[n].second;
+                          if ( group_number_p1 == group_number_p2 &&
+                               group_number_p1 == group_number_p3 &&
+                               group_number_p1 == group_number_p4 &&
+                               group_number_p1 == group_number_p5 &&
+                               group_number_p1 == group_number_p6 ) ++six;
+                          ++six_norm;
+                          for ( int o = n+1; o < mult; ++o )
+                            {
+                              double group_number_p7 = object[o].first;
+                              double parti_number_p7 = object[o].second;
+                              for ( int p = o+1; p < mult; ++p )
+                                {
+                                  double group_number_p8 = object[p].first;
+                                  double parti_number_p8 = object[p].second;
+                                  if ( group_number_p1 == group_number_p2 &&
+                                       group_number_p1 == group_number_p3 &&
+                                       group_number_p1 == group_number_p4 &&
+                                       group_number_p1 == group_number_p5 &&
+                                       group_number_p1 == group_number_p6 &&
+                                       group_number_p1 == group_number_p7 &&
+                                       group_number_p1 == group_number_p8 ) ++eight;
+                                  ++eight_norm;
+                                } // loop over p8
+                            } // loop over o7
+                        } // loop over n6
+                    } // loop over m5
+                } // loop over l4
+            } // loop over k3
+        } // loop over j2
+    } // loop over i1
   two /= two_norm;
   four /= four_norm;
+  six /= six_norm;
+  eight /= eight_norm;
 
 
 
