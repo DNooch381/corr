@@ -9,7 +9,7 @@ void get_corr(int,int,double); // primary
 void get_corr(int,int); // calls primary with a default
 
 // --- recursion function (uses vector of angles to do calculations)
-void do_correlation(vector<pair<double,double>>&);
+void do_correlation(vector<pair<double,double>>&, int);
 
 // --- gets system time, executes get_corr inside of over sequences/events
 void execute(int,int,int,double); // primary
@@ -124,7 +124,7 @@ void get_corr(int nparticles, int ntuple, double space)
 
   //cout << "size1 " << object.size() << endl;
 
-  do_correlation(object);
+  do_correlation(object,ntuple);
 
   return;
 
@@ -132,7 +132,7 @@ void get_corr(int nparticles, int ntuple, double space)
 
 
 
-void do_correlation(vector<pair<double,double>>& object)
+void do_correlation(vector<pair<double,double>>& object, int ntuple)
 {
 
   int mult = object.size();
@@ -158,6 +158,7 @@ void do_correlation(vector<pair<double,double>>& object)
           double parti_number_p2 = object[j].second;
           if ( group_number_p1 == group_number_p2 ) ++two;
           ++two_norm;
+          if ( ntuple == 2 ) continue;
           for ( int k = j+1; k < mult; ++k )
             {
               double group_number_p3 = object[k].first;
@@ -170,6 +171,7 @@ void do_correlation(vector<pair<double,double>>& object)
                        group_number_p1 == group_number_p3 &&
                        group_number_p1 == group_number_p4 ) ++four;
                   ++four_norm;
+                  if ( ntuple == 4 ) continue;
                   //cout << "hello" << endl;
                   for ( int m = l+1; m < mult; ++m )
                     {
@@ -185,6 +187,7 @@ void do_correlation(vector<pair<double,double>>& object)
                                group_number_p1 == group_number_p5 &&
                                group_number_p1 == group_number_p6 ) ++six;
                           ++six_norm;
+                          if ( ntuple == 6 ) continue;
                           for ( int o = n+1; o < mult; ++o )
                             {
                               double group_number_p7 = object[o].first;
