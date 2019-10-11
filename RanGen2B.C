@@ -12,26 +12,19 @@ void get_corr(int,int); // calls primary with a default
 void do_correlation(vector<pair<double,double>>&, int);
 
 // --- gets system time, executes get_corr inside of over sequences/events
-void execute(int,int,int,double); // primary
-void execute(int,int,int); // calls primary with a default
+void execute(int,int,int); // primary
 
 void RanGen2B()
 {
   int howmany = 1;
-  double space = 0.1; // default space between correlated ntuples...
-  execute(howmany,100,2,pi);
-  execute(howmany,100,4,pi/2);
-  execute(howmany,100,6,pi/3);
-  execute(howmany,100,8,pi/4);
+  execute(howmany,100,2);
+  execute(howmany,100,4);
+  execute(howmany,100,6);
+  execute(howmany,100,8);
 
 }
 
 void execute(int sequences, int nparticles, int ntuple)
-{
-  execute(sequences,nparticles,ntuple,0.1);
-}
-
-void execute(int sequences, int nparticles, int ntuple, double space)
 {
 
   int stop = nparticles/ntuple;
@@ -50,7 +43,7 @@ void execute(int sequences, int nparticles, int ntuple, double space)
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < stop; ++i )
 	{
-	  get_corr(i,ntuple,space);
+	  get_corr(i,ntuple);
 	}
     }
 
@@ -99,11 +92,6 @@ void execute(int sequences, int nparticles, int ntuple, double space)
 
 void get_corr(int nparticles, int ntuple)
 {
-  get_corr(nparticles,ntuple,0.1);
-}
-
-void get_corr(int nparticles, int ntuple, double space)
-{
 
   //vector <double> ang; // inserting pairs into single object
   vector<pair<double,double>> object;
@@ -112,7 +100,9 @@ void get_corr(int nparticles, int ntuple, double space)
   // i < 100 means go up to 100 events, ++i checks if it's less
   // than 100 and adds 1 -- if more than 100, than the program stops
 
-  int stop = nparticles/ntuple;
+  //int stop = nparticles/ntuple;
+  // somewhere i've gone wrong here, but it's definitely not generating enough pairs...
+  int stop = nparticles;
 
   for ( int i = 0; i < stop; ++i )
     {
