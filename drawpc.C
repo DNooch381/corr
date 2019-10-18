@@ -12,8 +12,8 @@ void drawpc()
   tp1f_8->GetXaxis()->SetRangeUser(0,100);
 
   c1->SetLogy();
-  c1->SetLogx();
-  c1->Print("pure_comb_8.png");
+  //c1->SetLogx();
+  c1->Print("Figures/pure_comb_8.png");
 
   TF1* fun1 = new TF1("fun1","[0]/pow(x,7)",7.0,99.9);
   fun1->SetParameter(0,5040); // asymptotic behavior from combinatorics (7!)
@@ -25,6 +25,6 @@ void drawpc()
   fun1->Draw("same");
   fun2->Draw("same");
 
-  c1->Print("pure_comb_8_fits.png");
+  c1->Print("Figures/pure_comb_8_fits.png");
 
 }
