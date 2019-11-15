@@ -1,6 +1,6 @@
-# This is the toy Monte Carlo for the UNCG combinatorics research
+# The toy Monte Carlo for the UNCG combinatorics research
 
-## These are the main files for this project
+## These are the main files and directories for this project
 
 File name | Description
 --------- | -----------
