@@ -1,4 +1,4 @@
-# The toy Monte Carlo for the UNCG combinatorics research
+# Toy Monte Carlo for UNCG combinatorics research
 
 ## These are the main files and directories for this project
 
