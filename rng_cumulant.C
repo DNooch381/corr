@@ -1,11 +1,22 @@
 void plotfit(TH1D*,TF1*,const char*);
 
+void clean_histo(TH1D*,int);
+
 void rng_cumulant()
 {
-  // TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500);
-  TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
-  TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5))",3.9, 500);
-  TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7))",3.9, 500);
+  // TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500); // no need
+  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
+  TF1* fun4 = new TF1("fun4","[0]/pow(x,[1])",3.9, 500);
+  fun4->SetParameter(0,6.0);
+  fun4->SetParameter(1,3.0);
+  // TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5))",3.9, 500);
+  // TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7))",3.9, 500);
+  TF1* fun6 = new TF1("fun6","[0]/pow(x,[1])",3.9, 500);
+  fun6->SetParameter(0,120.0);
+  fun6->SetParameter(1,5.0);
+  TF1* fun8 = new TF1("fun8","[0]/pow(x,[1])",3.9, 500);
+  fun8->SetParameter(0,5040.0);
+  fun8->SetParameter(1,7.0);
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
   TProfile* histogram2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
   // char handle2[20] = "2";
@@ -27,7 +38,10 @@ void rng_cumulant()
   cumulant2 -> Multiply(cumulant2);
   cumulant2 -> Scale(2.0);
   cumulant4 -> Add(cumulant2,-1.0);
+  clean_histo(cumulant4,4);
   plotfit(cumulant4,fun4,"_c4");
+
+  //return;
 
   TH1D* h_942 = histogram4 -> ProjectionX("h_942");
   TH1D* h_123 = histogram2 -> ProjectionX("h_123");
@@ -37,10 +51,12 @@ void rng_cumulant()
   h_123 -> Multiply(h_2);
   h_942 -> Scale(9.0);
   h_123 -> Scale(12.0);
-  
+
   TH1D* cumulant6 = histogram6 -> ProjectionX("cumulant6");
   cumulant6 -> Add(h_942,-1.0);
   cumulant6 -> Add(h_123,1.0);
+  clean_histo(cumulant6,6);
+  cumulant6->Scale(1.0/4.0); // c6 = 4v^6
   plotfit(cumulant6,fun6,"_c6");
 
   TH1D* h_4 = histogram4 -> ProjectionX("h_4");
@@ -64,8 +80,10 @@ void rng_cumulant()
   cumulant8 -> Add(h_4,-1.0);
   cumulant8 -> Add(h_14,1.0);
   cumulant8 -> Add(h_24,-1.0);
+  clean_histo(cumulant8,8);
+  cumulant8->Scale(1.0/33.0); // c8 = 33v^8
   plotfit(cumulant8,fun8,"_c8");
-  
+
 }
 
 void plotfit(TH1D* histogram, TF1* fun, const char* handle)
@@ -73,7 +91,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
 
   TCanvas* c1 = new TCanvas("c1","",800,600);
 
-  histogram->GetYaxis()->SetTitle("c_{2}{2}");
+  //histogram->GetYaxis()->SetTitle("c_{2}{2}"); // need to be smarter about this
   histogram->GetXaxis()->SetTitle("Number of particles");
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->SetMarkerStyle(kFullCircle);
@@ -86,22 +104,22 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   double xtex = 0.2;
   double ytex = 0.8;
   //tex->DrawLatex(xtex,ytex,"20");
-  c1->Print(Form("Figures/histogram%s_20.png",handle));
+  //c1->Print(Form("Figures/histogram%s_20.png",handle));
 
-  histogram->GetXaxis()->SetRangeUser(0,500);
+  histogram->GetXaxis()->SetRangeUser(0,100);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500");
-  c1->Print(Form("Figures/histogram%s_500.png",handle));
+  //tex->DrawLatex(xtex,ytex,"100");
+  //c1->Print(Form("Figures/histogram%s_100.png",handle));
 
   c1->SetLogy(1);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500logy");
-  c1->Print(Form("Figures/histogram%s_500logy.png",handle));
+  //tex->DrawLatex(xtex,ytex,"100logy");
+  //c1->Print(Form("Figures/histogram%s_100logy.png",handle));
 
   c1->SetLogx(1);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500logx/y");
-  c1->Print(Form("Figures/histogram%s_500logylogx.png",handle));
+  //tex->DrawLatex(xtex,ytex,"100logx/y");
+  //c1->Print(Form("Figures/histogram%s_100logylogx.png",handle));
 
   // --- redraw the same histograms above but with the fit
 
@@ -116,7 +134,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_100logylogx.png",handle));
 
   c1->SetLogx(0);
   histogram->Draw();
@@ -126,18 +144,22 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_100logy.png",handle));
 
   c1->SetLogy(0);
   histogram->Draw();
+  histogram->SetMinimum(0.0);
+  histogram->SetMaximum(1.0);
   xtex = 0.57;
   ytex = 0.66;
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
   ytex = 0.73;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
+  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_100.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,20);
+  histogram->SetMinimum(0.0);
+  histogram->SetMaximum(1.0);
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
@@ -150,3 +172,16 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   delete c1;
 
 } //end of rnghist2
+
+void clean_histo(TH1D* h, int n)
+{
+  for ( int i = 0; i < h->GetNbinsX(); ++i )
+    {
+      int bin = i+1;
+      if ( i%n != 0 )
+        {
+          h->SetBinContent(bin,-9999.9);
+          h->SetBinError(bin,9999.9);
+        }
+    }
+}
