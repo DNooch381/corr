@@ -95,7 +95,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
 
   //histogram->GetYaxis()->SetTitle("c_{2}{2}"); // need to be smarter about this
   histogram->GetXaxis()->SetTitle("Number of particles");
-  histogram->GetXaxis()->SetRangeUser(0,20);
+  histogram->GetXaxis()->SetRangeUser(0,50);
   histogram->SetMarkerStyle(kFullCircle);
   histogram->SetMarkerColor(kBlack);
   histogram->SetLineColor(kBlack);
@@ -109,8 +109,8 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   tex3->SetNDC();
   double xtex = 0.2;
   double ytex = 0.8;
-  //tex->DrawLatex(xtex,ytex,"20");
-  //c1->Print(Form("Figures/histogram%s_20.png",handle));
+  //tex->DrawLatex(xtex,ytex,"50");
+  //c1->Print(Form("Figures/histogram%s_50.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,500);
   histogram->Draw();
@@ -174,7 +174,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
 
-  histogram->GetXaxis()->SetRangeUser(0,20);
+  histogram->GetXaxis()->SetRangeUser(0,50);
   histogram->SetMinimum(0.0);
   histogram->SetMaximum(1.0);
   histogram->Draw();
@@ -187,7 +187,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_50.png",handle));
 
   delete c1;
 
@@ -203,7 +203,7 @@ void clean_histo(TH1D* h, int n)
       if ( n == 4 ) lcm = 4;
       if ( n == 6 ) lcm = 12;
       if ( n == 8 ) lcm = 24;
-      if ( i%n != 0 )
+      if ( i%lcm != 0 )
         {
           h->SetBinContent(bin,-9999.9);
           h->SetBinError(bin,9999.9);
