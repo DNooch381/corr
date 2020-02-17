@@ -129,7 +129,8 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
 
   // --- redraw the same histograms above but with the fit
 
-  histogram->Fit(fun,"R");
+  //histogram->Fit(fun,"R");
+  histogram->Fit(fun,"","",100,500);
   double par = fun->GetParameter(0);
   double epar = fun->GetParError(0);
   double par1 = fun->GetParameter(1);
