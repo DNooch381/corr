@@ -101,6 +101,10 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   // --- insert LTatex code blocks here
   TLatex* tex = new TLatex();
   tex->SetNDC();
+  TLatex* tex2 = new TLatex();
+  tex2->SetNDC();
+  TLatex* tex3 = new TLatex();
+  tex3->SetNDC();
   double xtex = 0.2;
   double ytex = 0.8;
   //tex->DrawLatex(xtex,ytex,"20");
@@ -133,17 +137,18 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
   ytex = 0.73;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_100logylogx.png",handle));
 
   c1->SetLogx(0);
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
-  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
+  //tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
+  tex->Draw();
   xtex = 0.57;
   ytex = 0.73;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  tex2->Draw();
   c1->Print(Form("Figures/histogram%s_fit_100logy.png",handle));
 
   c1->SetLogy(0);
@@ -152,10 +157,10 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->SetMaximum(1.0);
   xtex = 0.57;
   ytex = 0.66;
-  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
+  tex->Draw();
   xtex = 0.57;
   ytex = 0.73;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_100.png",handle));
+  tex2->Draw();
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->SetMinimum(0.0);
@@ -163,10 +168,10 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
-  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
+  tex->Draw();
   xtex = 0.57;
   ytex = 0.73;
-  tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  tex2->Draw();
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
   delete c1;
