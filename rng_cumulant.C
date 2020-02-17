@@ -130,6 +130,8 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->Fit(fun,"R");
   double par = fun->GetParameter(0);
   double epar = fun->GetParError(0);
+  double par1 = fun->GetParameter(1);
+  double epar1 = fun->GetParError(1);
   double chi2 = fun->GetChisquare();
   int ndf = fun->GetNDF();
   xtex = 0.57;
@@ -144,11 +146,10 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
-  //tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  tex->Draw();
+  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
   ytex = 0.73;
-  tex2->Draw();
+  tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_100logy.png",handle));
 
   c1->SetLogy(0);
@@ -157,10 +158,10 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->SetMaximum(1.0);
   xtex = 0.57;
   ytex = 0.66;
-  tex->Draw();
+  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
   ytex = 0.73;
-  tex2->Draw();
+  tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->SetMinimum(0.0);
@@ -168,10 +169,13 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
-  tex->Draw();
+  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
+  xtex = 0.57;
+  ytex = 0.60;
+  tex3->DrawLatex(xtex,ytex,Form("p_{1} = %.2f #pm %.2f",par1,epar1));
   xtex = 0.57;
   ytex = 0.73;
-  tex2->Draw();
+  tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   c1->Print(Form("Figures/histogram%s_fit_20.png",handle));
 
   delete c1;
