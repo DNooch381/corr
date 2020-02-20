@@ -146,6 +146,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  fun->Draw(Form("Figures/histogram%s_fit_500logylogx.png",handle));
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
   c1->SetLogx(0);
@@ -162,19 +163,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
 
   c1->SetLogy(0);
-  histogram->Draw();
-  histogram->SetMinimum(0.0);
-  histogram->SetMaximum(1.0);
-  xtex = 0.57;
-  ytex = 0.66;
-  tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
-  xtex = 0.57;
-  ytex = 0.60;
-  tex3->DrawLatex(xtex,ytex,Form("p_{1} = %.2f #pm %.2f",par1,epar1));
-  xtex = 0.57;
-  ytex = 0.73;
-  tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-
+ 
   histogram->GetXaxis()->SetRangeUser(0,50);
   histogram->SetMinimum(0.0);
   histogram->SetMaximum(1.0);
