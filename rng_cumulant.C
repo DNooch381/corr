@@ -5,16 +5,16 @@ void clean_histo(TH1D*,int);
 void rng_cumulant()
 {
   // TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500); // no need
-  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
-  TF1* fun4 = new TF1("fun4","[0]/pow(x,[1])",3.9, 500);
+  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",1.0, 500);
+  TF1* fun4 = new TF1("fun4","[0]/pow(x,[1])",1.0, 500);
   fun4->SetParameter(0,6.0);
   fun4->SetParameter(1,3.0);
-  // TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5))",3.9, 500);
-  // TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7))",3.9, 500);
-  TF1* fun6 = new TF1("fun6","[0]/pow(x,[1])",3.9, 500);
+  // TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5))",1.0, 500);
+  // TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7))",1.0, 500);
+  TF1* fun6 = new TF1("fun6","[0]/pow(x,[1])",1.0, 500);
   fun6->SetParameter(0,120.0);
   fun6->SetParameter(1,5.0);
-  TF1* fun8 = new TF1("fun8","[0]/pow(x,[1])",3.9, 500);
+  TF1* fun8 = new TF1("fun8","[0]/pow(x,[1])",1.0, 500);
   fun8->SetParameter(0,5040.0);
   fun8->SetParameter(1,7.0);
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
@@ -146,7 +146,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  fun->Draw(Form("Figures/histogram%s_fit_500logylogx.png",handle));
+  fun->Draw("same");
   c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
 
   c1->SetLogx(0);
@@ -160,10 +160,11 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  fun->Draw("same");
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
 
   c1->SetLogy(0);
- 
+
   histogram->GetXaxis()->SetRangeUser(0,50);
   histogram->SetMinimum(0.0);
   histogram->SetMaximum(1.0);
@@ -177,6 +178,7 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  fun->Draw("same");
   c1->Print(Form("Figures/histogram%s_fit_50.png",handle));
 
   delete c1;
