@@ -1,5 +1,13 @@
-#include "Recursion.C"
+#include <iostream>
 #include <sys/time.h>
+
+#include "TComplex.h"
+#include "TProfile.h"
+#include "TFile.h"
+#include "TRandom3.h"
+#include "Recursion.C"
+
+using namespace std;
 
 // --- correlation function (generates particles, calls recursion)
 void get_corr(int,int,double); // primary
