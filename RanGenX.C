@@ -10,14 +10,14 @@
 using namespace std;
 
 // --- correlation function (generates particles, calls recursion)
-void get_corr(int,int,double); // primary
-void get_corr(int,int); // calls primary with a default
+void get_corr(int,int,double,int);
 
 // --- recursion function (uses vector of angles to do calculations)
 void do_recursion(vector<double>&);
 
 // --- gets system time, executes get_corr inside of over sequences/events
-void execute(int,int,int,double); // primary
+void execute(int,int,int,double,int,int); // new primary
+void execute(int,int,int,double); // former primary
 void execute(int,int,int); // calls primary with a default
 
 void RanGenX()
@@ -28,7 +28,6 @@ void RanGenX()
   execute(howmany,700,4,space);
   execute(howmany,700,6,space);
   execute(howmany,700,8,space);
-
 }
 
 void execute(int sequences, int nparticles, int ntuple)
@@ -37,6 +36,11 @@ void execute(int sequences, int nparticles, int ntuple)
 }
 
 void execute(int sequences, int nparticles, int ntuple, double space)
+{
+  execute(sequences,nparticles,ntuple,space,-1,0);
+}
+
+void execute(int sequences, int nparticles, int ntuple, double space, int sequence_id, int seed)
 {
 
   int stop = nparticles/ntuple;
@@ -55,7 +59,7 @@ void execute(int sequences, int nparticles, int ntuple, double space)
       if ( j % 10 == 0 ) cout << "Executing sequence j = " << j << endl;
       for ( int i = 1; i < stop; ++i )
 	{
-	  get_corr(i,ntuple,space);
+	  get_corr(i,ntuple,space,seed);
 	}
     }
 
@@ -73,8 +77,12 @@ void execute(int sequences, int nparticles, int ntuple, double space)
   sprintf(timestamp,"%s-%s",daypart,timepart);
   cout<<"time stamp is "<<timestamp<<endl;
 
+  char outfilename[100];
+  sprintf(outfilename,"OutputFiles/OutFile_%s_k%d.root",timestamp,ntuple);
+  if ( sequence_id >= 0 ) sprintf(outfilename,"CondorOutput/OutFile_%04d_k%d.root",sequence_id,ntuple);
+
   //--- make an output file to write the histograms
-  TFile* HistFile = new TFile(Form("OutputFiles/OutFile_%s_k%d.root",timestamp,ntuple),"recreate");
+  TFile* HistFile = new TFile(outfilename,"recreate");
   HistFile->cd();
   // --- write recursion histo
   for ( int cs = 0; cs < 2; ++cs )
@@ -102,15 +110,11 @@ void execute(int sequences, int nparticles, int ntuple, double space)
 
 
 
-void get_corr(int nparticles, int ntuple)
-{
-  get_corr(nparticles,ntuple,0.1);
-}
-
-void get_corr(int nparticles, int ntuple, double space)
+void get_corr(int nparticles, int ntuple, double space, int seed)
 {
 
-  TRandom3 angle(0);
+  if ( seed < 0 ) seed = 0;
+  TRandom3 angle(seed);
 
   vector <double> ang; // inserting pairs into single object
 
@@ -235,7 +239,6 @@ void do_recursion(vector<double>& ang)
   TComplex eightRecursion = Recursion(8,harmonics_Eight_Num)/Recursion(8,harmonics_Eight_Den).Re();
   double spwEightRecursion = Recursion(8,harmonics_Eight_Den).Re();
   double wEightRecursion = 1.0;
-  cout << "here i am " << mult << " " << eightRecursion.Re() <<  endl;
   hmult_recursion[0][6]->Fill(mult,eightRecursion.Re(),wEightRecursion);
   hmult_recursion[1][6]->Fill(mult,eightRecursion.Im(),wEightRecursion);
 

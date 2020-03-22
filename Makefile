@@ -12,7 +12,7 @@ clean:
 debug: CFLAGS += -g
 debug: $(PROGRAMS)
 
-phenix: CFLAGS += -std=c++11 -m32
+phenix: CFLAGS += -std=c++11
 phenix: $(PROGRAMS)
 
 do_rangenx: do_rangenx.C
