@@ -122,7 +122,7 @@ void get_corr(int nparticles, int ntuple, double space, int seed)
   // i < 100 means go up to 100 events, ++i checks if it's less
   // than 100 and adds 1 -- if more than 100, than the program stops
 
-  int stop = nparticles/ntuple;
+  //int stop = nparticles/ntuple;
 
   for ( int i = 0; i < nparticles; ++i )
     {
@@ -213,7 +213,7 @@ void do_recursion(vector<double>& ang)
   int harmonics_Two_Num[2] = {2,-2}; // 2, -2
   int harmonics_Two_Den[2] = {0,0}; // recursion gives the right combinatorics
   TComplex twoRecursion = Recursion(2,harmonics_Two_Num)/Recursion(2,harmonics_Two_Den).Re();
-  double spwTwoRecursion = Recursion(2,harmonics_Two_Den).Re();
+  //double spwTwoRecursion = Recursion(2,harmonics_Two_Den).Re();
   double wTwoRecursion = 1.0;
   hmult_recursion[0][0]->Fill(mult,twoRecursion.Re(),wTwoRecursion);
   hmult_recursion[1][0]->Fill(mult,twoRecursion.Im(),wTwoRecursion);
@@ -221,7 +221,7 @@ void do_recursion(vector<double>& ang)
   int harmonics_Four_Num[4] = {2,2,-2,-2};
   int harmonics_Four_Den[4] = {0,0,0,0};
   TComplex fourRecursion = Recursion(4,harmonics_Four_Num)/Recursion(4,harmonics_Four_Den).Re();
-  double spwFourRecursion = Recursion(4,harmonics_Four_Den).Re();
+  //double spwFourRecursion = Recursion(4,harmonics_Four_Den).Re();
   double wFourRecursion = 1.0;
   hmult_recursion[0][2]->Fill(mult,fourRecursion.Re(),wFourRecursion);
   hmult_recursion[1][2]->Fill(mult,fourRecursion.Im(),wFourRecursion);
@@ -229,7 +229,7 @@ void do_recursion(vector<double>& ang)
   int harmonics_Six_Num[6] = {2,2,2,-2,-2,-2};
   int harmonics_Six_Den[6] = {0,0,0,0,0,0};
   TComplex sixRecursion = Recursion(6,harmonics_Six_Num)/Recursion(6,harmonics_Six_Den).Re();
-  double spwSixRecursion = Recursion(6,harmonics_Six_Den).Re();
+  //double spwSixRecursion = Recursion(6,harmonics_Six_Den).Re();
   double wSixRecursion = 1.0;
   hmult_recursion[0][4]->Fill(mult,sixRecursion.Re(),wSixRecursion);
   hmult_recursion[1][4]->Fill(mult,sixRecursion.Im(),wSixRecursion);
@@ -237,7 +237,7 @@ void do_recursion(vector<double>& ang)
   int harmonics_Eight_Num[8] = {2,2,2,2,-2,-2,-2,-2};
   int harmonics_Eight_Den[8] = {0,0,0,0,0,0,0,0};
   TComplex eightRecursion = Recursion(8,harmonics_Eight_Num)/Recursion(8,harmonics_Eight_Den).Re();
-  double spwEightRecursion = Recursion(8,harmonics_Eight_Den).Re();
+  //double spwEightRecursion = Recursion(8,harmonics_Eight_Den).Re();
   double wEightRecursion = 1.0;
   hmult_recursion[0][6]->Fill(mult,eightRecursion.Re(),wEightRecursion);
   hmult_recursion[1][6]->Fill(mult,eightRecursion.Im(),wEightRecursion);
