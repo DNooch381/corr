@@ -1,0 +1,13 @@
+Universe        = vanilla
+Notification    = Complete
+Executable      = /phenix/u/belmonrj/DylanCorr/phenix_dcorr.csh
+GetEnv          = False
+Initialdir      = /phenix/u/belmonrj/DylanCorr
+Error           = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).err
+Log             = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).log
+Output          = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).out
+
+Arguments = $(Process) 1000 $(Process)
+
+Queue 1000
+
