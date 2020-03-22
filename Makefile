@@ -16,5 +16,5 @@ phenix: CFLAGS += -std=c++11
 phenix: $(PROGRAMS)
 
 do_rangenx: do_rangenx.C
-	g++ -o do_rangenx do_rangenx.C $(CFLAGS) $(PFLAGS) $(RFLAGS)
+	g++ -o do_rangenx do_rangenx.C $(CFLAGS) $(RFLAGS)
 
