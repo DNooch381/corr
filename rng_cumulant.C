@@ -17,31 +17,58 @@ void rng_cumulant()
   TF1* fun8 = new TF1("fun8","[0]/pow(x,[1])",1.0, 500);
   fun8->SetParameter(0,5040.0);
   fun8->SetParameter(1,7.0);
+
+  // --- get the files with k-particle correlations
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
-  TProfile* histogram2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
-  // char handle2[20] = "2";
-
   TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
-  TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
-  char handle4[40] = "4";
-
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
-  TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_4");
-  char handle6[60] = "6";
-
   TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
-  TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_6");
-  char handle8[80] = "8";
 
-  TH1D* cumulant4 = histogram4 -> ProjectionX("cumulant4");
-  TH1D* cumulant2 = histogram2 -> ProjectionX("cumulant2");
+
+  // --- get the histograms from each file
+  TProfile* histogram2_f2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
+  TProfile* histogram2_f4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
+  TProfile* histogram2_f6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
+  TProfile* histogram2_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_0");
+
+  TProfile* histogram4_f2 = (TProfile*)HistFile2->Get("hmult_recursion_0_2");
+  TProfile* histogram4_f4 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
+  TProfile* histogram4_f6 = (TProfile*)HistFile6->Get("hmult_recursion_0_2");
+  TProfile* histogram4_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_2");
+
+  TProfile* histogram6_f2 = (TProfile*)HistFile2->Get("hmult_recursion_0_4");
+  TProfile* histogram6_f4 = (TProfile*)HistFile4->Get("hmult_recursion_0_4");
+  TProfile* histogram6_f6 = (TProfile*)HistFile6->Get("hmult_recursion_0_4");
+  TProfile* histogram6_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_4");
+
+  TProfile* histogram8_f2 = (TProfile*)HistFile2->Get("hmult_recursion_0_6");
+  TProfile* histogram8_f4 = (TProfile*)HistFile4->Get("hmult_recursion_0_6");
+  TProfile* histogram8_f6 = (TProfile*)HistFile6->Get("hmult_recursion_0_6");
+  TProfile* histogram8_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_6");
+
+  // --- four particle cumulant
+
+  TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
+  TH1D* cumulant2 = histogram2_f4 -> ProjectionX("cumulant2");
+  cumulant2 -> Multiply(cumulant2);
+  cumulant2 -> Scale(2.0);
+  cumulant4 -> Add(cumulant2,-1.0);
+  //clean_histo(cumulant4,4);
+  plotfit(cumulant4,fun4,"_c4_fouronly");
+
+  // TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
+  // TH1D* cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
+  cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
+  cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
   cumulant2 -> Multiply(cumulant2);
   cumulant2 -> Scale(2.0);
   cumulant4 -> Add(cumulant2,-1.0);
   clean_histo(cumulant4,4);
-  plotfit(cumulant4,fun4,"_c4");
+  plotfit(cumulant4,fun4,"_c4_mixed");
 
-  //return;
+  return;
+
+  /*
 
   TH1D* h_942 = histogram4 -> ProjectionX("h_942");
   TH1D* h_123 = histogram2 -> ProjectionX("h_123");
@@ -85,6 +112,8 @@ void rng_cumulant()
   fun8->SetParameter(0,10);
   fun8->SetParameter(1,3);
   plotfit(cumulant8,fun8,"_c8");
+
+  */
 
 }
 
