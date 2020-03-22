@@ -19,10 +19,14 @@ void rng_cumulant()
   fun8->SetParameter(1,7.0);
 
   // --- get the files with k-particle correlations
-  TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
-  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
-  TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
-  TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
+  // TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
+  // TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
+  // TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
+  // TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
+  TFile* HistFile2 = new TFile("CondorOutput/SumFile_k2.root","read");
+  TFile* HistFile4 = new TFile("CondorOutput/SumFile_k4.root","read");
+  TFile* HistFile6 = new TFile("CondorOutput/SumFile_k6.root","read");
+  TFile* HistFile8 = new TFile("CondorOutput/SumFile_k8.root","read");
 
 
   // --- get the histograms from each file
