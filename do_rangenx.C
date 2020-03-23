@@ -27,11 +27,14 @@ int main(int argc, char *argv[])
   int seed = 0;
   if ( argc > 3 ) seed = atoi(argv[3]);
 
+  double space = 0.1;
+  if ( argc > 4 ) space = atof(argv[4]);
+
   cout << "Sequence " << sequence << endl;
   cout << "Number of events " << nevents << endl;
   cout << "Random seed " << seed << endl;
+  cout << "Tuplet space " << space << endl;
 
-  double space = 0.1; // default space between correlated ntuples...
   execute(nevents,700,2,space,sequence,seed);
   execute(nevents,700,4,space,sequence,seed);
   execute(nevents,700,6,space,sequence,seed);
