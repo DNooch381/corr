@@ -51,11 +51,19 @@ void test_cumu()
       double cumu4 = four - twotwotwo;
       if ( i < 100 ) cout << i << " " << two << " " << twotwotwo << " " << four << " " << cumu4 << endl;
       hc4->SetBinContent(i+1,0.0);
-      if ( cumu4 > 0 ) hc4->SetBinContent(i+1,cumu4);
+      cumu4 = fabs(cumu4); // fluctuations about zero should be on the order of the correct size...
+      if ( cumu4 > 0 && i > 2 ) hc4->SetBinContent(i+1,cumu4);
     }
 
   hc4->Draw();
   c1->SetLogy();
   c1->Print("TestFigs/test_fig_cleaned_c4.png");
+
+  TF1* fun = new TF1("fun","[0]/pow(x,[1])",0,500);
+  fun->FixParameter(0,10.0);
+  fun->FixParameter(1,3.0);
+  hc4->Fit(fun,"","",4,100);
+  c1->SetLogy();
+  c1->Print("TestFigs/test_fig_fitcleaned_c4.png");
 
 }
