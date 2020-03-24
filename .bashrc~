@@ -1,6 +1,0 @@
-alias ll=‘ls -l’
-alias en=‘emacs -nw’
-alias cp=‘cp -i’
-alias mv=‘mv -i’
-alias die=‘kill -9 %%’
-alias rblq=‘root -b -l -q’
