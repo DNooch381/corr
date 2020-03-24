@@ -1,6 +1,6 @@
 void plotfit(TProfile*,TF1*,const char*);
 
-void rnghistXR()
+void rng_histXR()
 {
 
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
