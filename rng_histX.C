@@ -1,110 +1,89 @@
-void plotfit(TProfile*,TF1*,const char*);
+void plotfit(TProfile*,TF1*,const char*,int);
 
-void callX();
-void callXR();
+void callX(int);
+void callXR(int);
+void callNEW(int);
 
 void rng_histX()
 {
-  callX();
-  callXR();
+  int maximum = 100;
+  //callX(maximum);
+  callXR(maximum);
 }
 
-void callXR()
+void callXR(int maximum)
 {
 
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
   TProfile* histogram2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
-  TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 100);
-  //TF1* fun2 = new TF1("fun2","[0]/x",2, 100);
+  TF1* fun2 = new TF1("fun2","[0]/x",2, maximum);
   fun2->FixParameter(0,1.0);
   char handle2[20] = "2";
-  plotfit(histogram2,fun2,handle2);
+  plotfit(histogram2,fun2,handle2,maximum);
 
   TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
   TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
   char handle4[40] = "4";
-  //TF1* fun4 = new TF1("fun4","[0]/((x-4)*(x+4))",4.1, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x+3))",3.9, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x+1))",3.9, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-1))",3.9, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x))",3.9, 100);
-  TF1* fun4 = new TF1("fun4","[0]/(pow(x,[1]))",4, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/(pow(x-1,[1]))",4, 100);
-  //TF1* fun4 = new TF1("fun4","[0]/(pow(x+2,[1]))",4, 100);
+  TF1* fun4 = new TF1("fun4","[0]/(pow(x,[1]))",4, maximum);
   fun4->FixParameter(0,17.0);
-  fun4->FixParameter(1,2.0);
-  plotfit(histogram4,fun4,handle4);
-
-  //return;
+  fun4->FixParameter(1,2.0); // 1/N^2 (k/2 power)
+  plotfit(histogram4,fun4,handle4,maximum);
 
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_4");
   char handle6[60] = "6";
-  TF1* fun6 = new TF1("fun6","[0]/(pow(x,[1]))",6, 100);
-  //TF1* fun6 = new TF1("fun6","[0]/(pow(x-1,[1]))",6, 100);
-  //TF1* fun6 = new TF1("fun6","[0]/(pow(x+6,[1]))",6, 100);
-  //TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x-2)*(x-3))",6, 100);
-  //TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x+1)*(x+3))",6, 100);
-  //TF1* fun6 = new TF1("fun6","[0]/((x-1)*(x+3)*(x+7))",6, 100);
+  TF1* fun6 = new TF1("fun6","[0]/(pow(x,[1]))",6, maximum);
   fun6->FixParameter(0,675.0);
-  fun6->FixParameter(1,3.0);
-  plotfit(histogram6,fun6,handle6);
-
-  //return;
+  fun6->FixParameter(1,3.0); // 1/N^3 (k/2 power)
+  plotfit(histogram6,fun6,handle6,maximum);
 
   TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
   TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_6");
   char handle8[80] = "8";
-  TF1* fun8 = new TF1("fun8","[0]/(pow(x,[1]))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/(pow(x-1,[1]))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/(pow(x+8,[1]))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x-2)*(x-3)*(x-4))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/((x+2)*(x+4)*(x+6)*(x+8))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x+1)*(x+3)*(x+5))",8, 100);
-  //TF1* fun8 = new TF1("fun8","[0]/((x-1)*(x+3)*(x+7)*(x+11))",8, 100);
-  //fun8->FixParameter(0,45000.0);
+  TF1* fun8 = new TF1("fun8","[0]/(pow(x,[1]))",8, maximum);
   fun8->FixParameter(0,40000.0);
-  fun8->FixParameter(1,4.0);
-  plotfit(histogram8,fun8,handle8);
+  fun8->FixParameter(1,4.0); // 1/N^4 (k/2 power)
+  plotfit(histogram8,fun8,handle8,maximum);
 
 }
 
-void callX()
+void callX(int maximum)
+{
 
   TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
   TProfile* histogram2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
-  TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500);
+  TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, maximum);
   char handle2[20] = "2";
-  plotfit(histogram2,fun2,handle2);
+  plotfit(histogram2,fun2,handle2,maximum);
 
   TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
   TProfile* histogram4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
   char handle4[40] = "4";
-  plotfit(histogram4,fun2,handle4);
+  plotfit(histogram4,fun2,handle4,maximum);
 
   // TProfile* histogram44 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
-  // TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, 500);
+  // TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, maximum);
   // char handle44[40] = "44";
-  // plotfit(histogram44,fun4,handle44);
+  // plotfit(histogram44,fun4,handle44,maximum);
 
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
   char handle6[60] = "6";
-  plotfit(histogram6,fun2,handle6);
+  plotfit(histogram6,fun2,handle6,maximum);
 
   TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
   TProfile* histogram8 = (TProfile*)HistFile8->Get("hmult_recursion_0_0");
   char handle8[80] = "8";
-  plotfit(histogram8,fun2,handle8);
+  plotfit(histogram8,fun2,handle8,maximum);
 
 }
 
-void plotfit(TProfile* histogram, TF1* fun, const char* handle)
+void plotfit(TProfile* histogram, TF1* fun, const char* handle, int maximum)
 {
 
   TCanvas* c1 = new TCanvas("c1","",800,600);
 
-  histogram->GetYaxis()->SetTitle("c_{2}{2}");
+  histogram->GetYaxis()->SetTitle(Form("#LT%s#GT",handle)); // hackish
   histogram->GetXaxis()->SetTitle("Number of particles");
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->SetMarkerStyle(kFullCircle);
@@ -119,20 +98,20 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   //tex->DrawLatex(xtex,ytex,"20");
   //c1->Print(Form("Figures/histogram%s_20.png",handle));
 
-  histogram->GetXaxis()->SetRangeUser(0,500);
+  histogram->GetXaxis()->SetRangeUser(0,maximum);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500");
-  //c1->Print(Form("Figures/histogram%s_500.png",handle));
+  //tex->DrawLatex(xtex,ytex,"maximum");
+  //c1->Print(Form("Figures/histogram%s_maximum.png",handle));
 
   c1->SetLogy(1);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500logy");
-  //c1->Print(Form("Figures/histogram%s_500logy.png",handle));
+  //tex->DrawLatex(xtex,ytex,"maximumlogy");
+  //c1->Print(Form("Figures/histogram%s_maximumlogy.png",handle));
 
   c1->SetLogx(1);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"500logx/y");
-  //c1->Print(Form("Figures/histogram%s_500logylogx.png",handle));
+  //tex->DrawLatex(xtex,ytex,"maximumlogx/y");
+  //c1->Print(Form("Figures/histogram%s_maximumlogylogx.png",handle));
 
   // --- redraw the same histograms above but with the fit
 
@@ -147,7 +126,7 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_500logylogx.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_%dlogylogx.png",handle,maximum));
 
   c1->SetLogx(0);
   histogram->Draw();
@@ -157,7 +136,7 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   xtex = 0.57;
   ytex = 0.73;
   //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
-  c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_%dlogy.png",handle,maximum));
 
   c1->SetLogy(0);
   histogram->Draw();
@@ -166,7 +145,7 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle)
   //tex->DrawLatex(xtex,ytex,Form("p_{0} = %.2f #pm %.2f",par,epar));
   xtex = 0.57;
   ytex = 0.73;
-  //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_500.png",handle));
+  //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));  c1->Print(Form("Figures/histogram%s_fit_maximum.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,20);
   histogram->Draw();
