@@ -1,6 +1,6 @@
 Universe        = vanilla
 Notification    = Complete
-Executable      = /phenix/u/belmonrj/DylanCorr/phenix_dcorr.csh
+Executable      = /phenix/u/belmonrj/DylanCorr/sphenix_dcorr.csh
 GetEnv          = False
 Initialdir      = /phenix/u/belmonrj/DylanCorr
 Error           = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).err
