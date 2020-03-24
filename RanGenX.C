@@ -4,7 +4,7 @@
 #include "TComplex.h"
 #include "TProfile.h"
 #include "TFile.h"
-#include "TRandom3.h"
+#include "TRandomGen.h"
 #include "Recursion.C"
 
 using namespace std;
@@ -114,7 +114,7 @@ void get_corr(int nparticles, int ntuple, double space, int seed)
 {
 
   if ( seed < 0 ) seed = 0;
-  TRandom3 angle(seed);
+  TRandomMixMax angle(seed);
 
   vector <double> ang; // inserting pairs into single object
 
