@@ -23,7 +23,7 @@ void drawpc_2()
   tp1f_2->SetMarkerColor(kBlack);
   tp1f_2->Draw("ex0p");
   tp1f_2->GetXaxis()->SetRangeUser(0,100);
-  tp1f_2->GetXaxis()->SetTitle("Number");
+  tp1f_2->GetXaxis()->SetTitle("Number of particles");
   tp1f_2->GetYaxis()->SetTitle("C_{2}");
 
   c1->SetLogy();
@@ -39,9 +39,16 @@ void drawpc_2()
   fun1->Draw("same");
   fun2->Draw("same");
 
+  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
   c1->Print("Figures/pure_comb_2_fits_100logxlogy.png");
   c1->SetLogx(0);
   c1->Print("Figures/pure_comb_2_fits_100logy.png");
+
+  delete c1;
 
 }
 void drawpc_4()
@@ -56,7 +63,7 @@ void drawpc_4()
   tp1f_4->SetMarkerColor(kBlack);
   tp1f_4->Draw("ex0p");
   tp1f_4->GetXaxis()->SetRangeUser(0,100);
-  tp1f_4->GetXaxis()->SetTitle("Number");
+  tp1f_4->GetXaxis()->SetTitle("Number of particles");
   tp1f_4->GetYaxis()->SetTitle("C_{4}");
 
   c1->SetLogy();
@@ -73,9 +80,16 @@ void drawpc_4()
   fun1->Draw("same");
   fun2->Draw("same");
 
+  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
   c1->Print("Figures/pure_comb_4_fits_100logxlogy.png");
   c1->SetLogx(0);
   c1->Print("Figures/pure_comb_4_fits_100logy.png");
+
+  delete c1;
 
 }
 void drawpc_6()
@@ -90,7 +104,7 @@ void drawpc_6()
   tp1f_6->SetMarkerColor(kBlack);
   tp1f_6->Draw("ex0p");
   tp1f_6->GetXaxis()->SetRangeUser(0,100);
-  tp1f_6->GetXaxis()->SetTitle("Number");
+  tp1f_6->GetXaxis()->SetTitle("Number of particles");
   tp1f_6->GetYaxis()->SetTitle("C_{6}");
 
   c1->SetLogy();
@@ -107,9 +121,16 @@ void drawpc_6()
   fun1->Draw("same");
   fun2->Draw("same");
 
+  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
   c1->Print("Figures/pure_comb_6_fits_100logxlogy.png");
   c1->SetLogx(0);
   c1->Print("Figures/pure_comb_6_fits_100logy.png");
+
+  delete c1;
 
 }
 void drawpc_8()
@@ -124,7 +145,7 @@ void drawpc_8()
   tp1f_8->SetMarkerColor(kBlack);
   tp1f_8->Draw("ex0p");
   tp1f_8->GetXaxis()->SetRangeUser(0,100);
-  tp1f_8->GetXaxis()->SetTitle("Number");
+  tp1f_8->GetXaxis()->SetTitle("Number of particles");
   tp1f_8->GetYaxis()->SetTitle("C_{8}");
 
   c1->SetLogy();
@@ -141,8 +162,15 @@ void drawpc_8()
   fun1->Draw("same");
   fun2->Draw("same");
 
+  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
   c1->Print("Figures/pure_comb_8_fits_100logxlogy.png");
   c1->SetLogx(0);
   c1->Print("Figures/pure_comb_8_fits_100logy.png");
+
+  delete c1;
 
 }
