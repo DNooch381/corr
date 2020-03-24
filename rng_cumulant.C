@@ -1,3 +1,5 @@
+int get_lcm(int,int);
+
 void plotfit(TH1D*,TF1*,const char*);
 
 void clean_histo(TH1D*,int);
@@ -226,15 +228,18 @@ void clean_histo(TH1D* h, int n)
   for ( int i = 0; i < h->GetNbinsX(); ++i )
     {
       int bin = i+1;
-      int lcm = 0;
-      if ( n == 2 ) lcm = 2;
-      if ( n == 4 ) lcm = 4;
-      if ( n == 6 ) lcm = 12;
-      if ( n == 8 ) lcm = 24;
+      int lcm = get_lcm(n,2);
       if ( i%lcm != 0 )
         {
           h->SetBinContent(bin,-9999.9);
           h->SetBinError(bin,9999.9);
         }
     }
+}
+
+int get_lcm(int num1, int num2)
+{
+  int maxValue = (num1 > num2) ? num1 : num2;
+  while ( ((maxValue % num1 == 0) && (maxValue % num2 == 0)) == false ) ++maxValue;
+  return maxValue;
 }
