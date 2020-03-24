@@ -61,11 +61,6 @@ void callX(int maximum)
   char handle4[40] = "4";
   plotfit(histogram4,fun2,handle4,maximum);
 
-  // TProfile* histogram44 = (TProfile*)HistFile4->Get("hmult_recursion_0_2");
-  // TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",3.9, maximum);
-  // char handle44[40] = "44";
-  // plotfit(histogram44,fun4,handle44,maximum);
-
   TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   TProfile* histogram6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
   char handle6[60] = "6";
@@ -95,23 +90,10 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle, int maximum)
   tex->SetNDC();
   double xtex = 0.2;
   double ytex = 0.8;
-  //tex->DrawLatex(xtex,ytex,"20");
-  //c1->Print(Form("Figures/histogram%s_20.png",handle));
 
   histogram->GetXaxis()->SetRangeUser(0,maximum);
   histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"maximum");
-  //c1->Print(Form("Figures/histogram%s_maximum.png",handle));
-
   c1->SetLogy(1);
-  histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"maximumlogy");
-  //c1->Print(Form("Figures/histogram%s_maximumlogy.png",handle));
-
-  c1->SetLogx(1);
-  histogram->Draw();
-  //tex->DrawLatex(xtex,ytex,"maximumlogx/y");
-  //c1->Print(Form("Figures/histogram%s_maximumlogylogx.png",handle));
 
   // --- redraw the same histograms above but with the fit
 
@@ -159,4 +141,4 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle, int maximum)
 
   delete c1;
 
-} //end of rnghist2
+}
