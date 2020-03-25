@@ -6,9 +6,10 @@ void callNEW(int);
 
 void rng_histX()
 {
-  int maximum = 100;
+  //int maximum = 100;
   //callX(maximum);
-  callXR(maximum);
+  callXR(100);
+  callXR(500);
 }
 
 void callXR(int maximum)
