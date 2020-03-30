@@ -114,7 +114,7 @@ void get_corr(int nparticles, int ntuple, double space, int seed)
 {
 
   if ( seed < 0 ) seed = 0;
-  TRandomMixMax256 angle(seed);
+  TRandomMT64 angle(seed);
 
   vector <double> ang; // inserting pairs into single object
 
