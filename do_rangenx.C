@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 
   int seed = 0;
   if ( argc > 3 ) seed = atoi(argv[3]);
+  seed *= 1000;
 
   double space = 0.1;
   if ( argc > 4 ) space = atof(argv[4]);
