@@ -7,7 +7,7 @@ Error           = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).err
 Log             = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).log
 Output          = /phenix/u/belmonrj/DylanCorr/logs/job_$(Process).out
 
-Arguments = $(Process) 100 $(Process) 0.1
+Arguments = $(Process) 1000 $(Process) 0.1
 
 Queue 1000
 
