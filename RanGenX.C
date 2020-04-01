@@ -16,7 +16,7 @@ void get_corr(int,int,double,int);
 void do_recursion(vector<double>&);
 
 // --- gets system time, executes get_corr inside of over sequences/events
-void execute(int,int,int,double,int,int); // new primary
+void execute(int,int,int,double,int,unsigned int); // new primary
 void execute(int,int,int,double); // former primary
 void execute(int,int,int); // calls primary with a default
 
@@ -40,7 +40,7 @@ void execute(int sequences, int nparticles, int ntuple, double space)
   execute(sequences,nparticles,ntuple,space,-1,0);
 }
 
-void execute(int sequences, int nparticles, int ntuple, double space, int sequence_id, int seed)
+void execute(int sequences, int nparticles, int ntuple, double space, int sequence_id, unsigned int seed)
 {
 
   int stop = nparticles/ntuple;

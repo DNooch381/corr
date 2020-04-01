@@ -24,9 +24,10 @@ int main(int argc, char *argv[])
   int nevents = 10;
   if ( argc > 2 ) nevents = atoi(argv[2]);
 
-  int seed = 0;
-  if ( argc > 3 ) seed = atoi(argv[3]);
-  seed *= 1000;
+  int get_seed = 0;
+  unsigned int seed = 0;
+  if ( argc > 3 ) get_seed = atoi(argv[3]);
+  if ( get_seed > 0 ) seed = get_seed * 1e6;
 
   double space = 0.1;
   if ( argc > 4 ) space = atof(argv[4]);
