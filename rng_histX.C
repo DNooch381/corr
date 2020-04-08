@@ -110,6 +110,9 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle, int maximum)
   xtex = 0.57;
   ytex = 0.73;
   //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  TLegend* leg = new TLegend(0.48,0.68,0.80,0.88);
+  leg->AddEntry(fun,"power law function (k/2)","l");
+  leg->Draw();
   c1->Print(Form("Figures/histogram%s_fit_%dlogylogx.png",handle,maximum));
 
   c1->SetLogx(0);
@@ -120,6 +123,7 @@ void plotfit(TProfile* histogram, TF1* fun, const char* handle, int maximum)
   xtex = 0.57;
   ytex = 0.73;
   //tex->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
+  leg->Draw();
   c1->Print(Form("Figures/histogram%s_fit_%dlogy.png",handle,maximum));
 
   c1->SetLogy(0);
