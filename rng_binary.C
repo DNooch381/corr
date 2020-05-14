@@ -39,13 +39,21 @@ void drawpc_2()
   fun1->Draw("same");
   fun2->Draw("same");
 
-  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  // Legend: 2 Particle
+
+  TLegend* leg = new TLegend(0.2,0.2,0.46,0.4);
   leg->AddEntry(fun2,"combinatoric function","l");
   leg->AddEntry(fun1,"power law function","l");
   leg->Draw();
 
   c1->Print("Figures/pure_comb_2_fits_100logxlogy.png");
   c1->SetLogx(0);
+
+  TLegend* leg2 = new TLegend(0.48,0.68,0.84,0.88);
+  leg2->AddEntry(fun2,"combinatoric function","l");
+  leg2->AddEntry(fun1,"power law function","l");
+  leg2->Draw();
+
   c1->Print("Figures/pure_comb_2_fits_100logy.png");
 
   delete c1;
@@ -80,14 +88,22 @@ void drawpc_4()
   fun1->Draw("same");
   fun2->Draw("same");
 
-  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  // Legend: 4 Particle
+  
+  TLegend* leg = new TLegend(0.2,0.2,0.46,0.4);
   leg->AddEntry(fun2,"combinatoric function","l");
   leg->AddEntry(fun1,"power law function","l");
   leg->Draw();
 
   c1->Print("Figures/pure_comb_4_fits_100logxlogy.png");
   c1->SetLogx(0);
-  c1->Print("Figures/pure_comb_4_fits_100logy.png");
+
+  TLegend* leg4 = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
+  c1->Print("Figures/pure_comb_4_fits_100logy");
 
   delete c1;
 
@@ -121,14 +137,22 @@ void drawpc_6()
   fun1->Draw("same");
   fun2->Draw("same");
 
-  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+  // Legend: 6 Particle
+  
+  TLegend* leg = new TLegend(0.2,0.2,0.46,0.4);
   leg->AddEntry(fun2,"combinatoric function","l");
   leg->AddEntry(fun1,"power law function","l");
   leg->Draw();
 
   c1->Print("Figures/pure_comb_6_fits_100logxlogy.png");
   c1->SetLogx(0);
-  c1->Print("Figures/pure_comb_6_fits_100logy.png");
+
+  TLegend* leg6 = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
+  c1->Print("Figures/pure_comb_6_fits_100logy");
 
   delete c1;
 
@@ -162,15 +186,23 @@ void drawpc_8()
   fun1->Draw("same");
   fun2->Draw("same");
 
-  TLegend* leg = new TLegend(0.48,0.68,0.84,0.88);
+ // Legend: 8 Particle
+  
+  TLegend* leg = new TLegend(0.2,0.2,0.46,0.4);
   leg->AddEntry(fun2,"combinatoric function","l");
   leg->AddEntry(fun1,"power law function","l");
   leg->Draw();
 
   c1->Print("Figures/pure_comb_8_fits_100logxlogy.png");
   c1->SetLogx(0);
-  c1->Print("Figures/pure_comb_8_fits_100logy.png");
 
+  TLegend* leg8 = new TLegend(0.48,0.68,0.84,0.88);
+  leg->AddEntry(fun2,"combinatoric function","l");
+  leg->AddEntry(fun1,"power law function","l");
+  leg->Draw();
+
+  c1->Print("Figures/pure_comb_8_fits_100logy");
+  
   delete c1;
 
 }
