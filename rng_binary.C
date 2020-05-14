@@ -99,11 +99,11 @@ void drawpc_4()
   c1->SetLogx(0);
 
   TLegend* leg4 = new TLegend(0.48,0.68,0.84,0.88);
-  leg->AddEntry(fun2,"combinatoric function","l");
-  leg->AddEntry(fun1,"power law function","l");
-  leg->Draw();
+  leg4->AddEntry(fun2,"combinatoric function","l");
+  leg4->AddEntry(fun1,"power law function","l");
+  leg4->Draw();
 
-  c1->Print("Figures/pure_comb_4_fits_100logy");
+  c1->Print("Figures/pure_comb_4_fits_100logy.png");
 
   delete c1;
 
@@ -148,11 +148,11 @@ void drawpc_6()
   c1->SetLogx(0);
 
   TLegend* leg6 = new TLegend(0.48,0.68,0.84,0.88);
-  leg->AddEntry(fun2,"combinatoric function","l");
-  leg->AddEntry(fun1,"power law function","l");
-  leg->Draw();
+  leg6->AddEntry(fun2,"combinatoric function","l");
+  leg6->AddEntry(fun1,"power law function","l");
+  leg6->Draw();
 
-  c1->Print("Figures/pure_comb_6_fits_100logy");
+  c1->Print("Figures/pure_comb_6_fits_100logy.png");
 
   delete c1;
 
@@ -197,11 +197,11 @@ void drawpc_8()
   c1->SetLogx(0);
 
   TLegend* leg8 = new TLegend(0.48,0.68,0.84,0.88);
-  leg->AddEntry(fun2,"combinatoric function","l");
-  leg->AddEntry(fun1,"power law function","l");
-  leg->Draw();
+  leg8->AddEntry(fun2,"combinatoric function","l");
+  leg8->AddEntry(fun1,"power law function","l");
+  leg8->Draw();
 
-  c1->Print("Figures/pure_comb_8_fits_100logy");
+  c1->Print("Figures/pure_comb_8_fits_100logy.png");
   
   delete c1;
 
