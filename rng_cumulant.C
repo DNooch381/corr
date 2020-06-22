@@ -7,6 +7,10 @@ void clean_histo(TH1D*,int);
 void rng_cumulant()
 {
   // TF1* fun2 = new TF1("fun2","[0]/(x-1)",1.9, 500); // no need
+  // TF1* fun2 = new TF1("fun2","[0]/x",1.9, 500);
+  TF1* fun2 = new TF1("fun2","[0]/pow(x,[1])",1.0, 500);
+  fun2->SetParameter(0,1.0);
+  fun2->SetParameter(1,1.0);
   //TF1* fun4 = new TF1("fun4","[0]/((x-1)*(x-2)*(x-3))",1.0, 500);
   TF1* fun4 = new TF1("fun4","[0]/pow(x,[1])",1.0, 500);
   fun4->SetParameter(0,6.0);
@@ -58,6 +62,7 @@ void rng_cumulant()
   // --- four particle cumulant
   // NOTE TO RON: This produces c4, but appears c2, c6, and c8 are buried in here somewhere. Heavy commenting breaks things up a bit.
 
+  /*
   TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
   TH1D* cumulant2 = histogram2_f4 -> ProjectionX("cumulant2");
   cumulant2 -> Multiply(cumulant2);
@@ -65,20 +70,28 @@ void rng_cumulant()
   cumulant4 -> Add(cumulant2,-1.0);
   //clean_histo(cumulant4,4);
   plotfit(cumulant4,fun4,"_c4_fouronly");
+  */
 
-  // TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
-  // TH1D* cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
-  cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
-  cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
+
+
+  TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
+  TH1D* cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
+  // cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
+  // cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
+  plotfit(cumulant2,fun2,"_c2"); // new...
   cumulant2 -> Multiply(cumulant2);
   cumulant2 -> Scale(2.0);
   cumulant4 -> Add(cumulant2,-1.0);
   clean_histo(cumulant4,4);
-  plotfit(cumulant4,fun4,"_c4_mixed");
+  //plotfit(cumulant4,fun4,"_c4_mixed");
+  plotfit(cumulant4,fun4,"_c4");
 
-  return;
+  //return;
 
-  /*
+  TProfile* histogram2 = histogram2_f2;
+  TProfile* histogram4 = histogram4_f4;
+  TProfile* histogram6 = histogram6_f6;
+  TProfile* histogram8 = histogram8_f8;
 
   TH1D* h_942 = histogram4 -> ProjectionX("h_942");
   TH1D* h_123 = histogram2 -> ProjectionX("h_123");
@@ -123,7 +136,7 @@ void rng_cumulant()
   fun8->SetParameter(1,3);
   plotfit(cumulant8,fun8,"_c8");
 
-  */
+
 
 }
 
