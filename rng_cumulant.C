@@ -21,6 +21,7 @@ void rng_cumulant()
   fun8->SetParameter(1,7.0);
 
   // --- get the files with k-particle correlations
+  //NOTE TO RON: Which macro is being pumped into this: RanGen2X.c or RanGenX.c
   
   // TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
   // TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
@@ -55,6 +56,7 @@ void rng_cumulant()
   TProfile* histogram8_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_6");
 
   // --- four particle cumulant
+  // NOTE TO RON: This produces c4, but appears c2, c6, and c8 are buried in here somewhere. Heavy commenting breaks things up a bit.
 
   TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
   TH1D* cumulant2 = histogram2_f4 -> ProjectionX("cumulant2");
