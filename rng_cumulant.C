@@ -27,14 +27,14 @@ void rng_cumulant()
   // --- get the files with k-particle correlations
   //NOTE TO RON: Which macro is being pumped into this: RanGen2X.c or RanGenX.c
   
-  // TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
-  // TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
-  // TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
-  // TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
-  TFile* HistFile2 = new TFile("CondorOutput/SumFile_k2.root","read");
-  TFile* HistFile4 = new TFile("CondorOutput/SumFile_k4.root","read");
-  TFile* HistFile6 = new TFile("CondorOutput/SumFile_k6.root","read");
-  TFile* HistFile8 = new TFile("CondorOutput/SumFile_k8.root","read");
+  TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
+  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
+  TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
+  TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
+  // TFile* HistFile2 = new TFile("CondorOutput/SumFile_k2.root","read");
+  // TFile* HistFile4 = new TFile("CondorOutput/SumFile_k4.root","read");
+  // TFile* HistFile6 = new TFile("CondorOutput/SumFile_k6.root","read");
+  // TFile* HistFile8 = new TFile("CondorOutput/SumFile_k8.root","read");
 
 
   // --- get the histograms from each file
