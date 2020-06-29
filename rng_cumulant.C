@@ -1,6 +1,6 @@
 int get_lcm(int,int);
 
-void plotfit(TH1D*,TF1*,const char*);
+void plotfit(TH1D*,TF1*,const char*,const char*);
 
 void clean_histo(TH1D*,int);
 
@@ -78,13 +78,13 @@ void rng_cumulant()
   TH1D* cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
   // cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
   // cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
-  plotfit(cumulant2,fun2,"_c2"); // new...
+  plotfit(cumulant2,fun2,"_c2","c{2}");
   cumulant2 -> Multiply(cumulant2);
   cumulant2 -> Scale(2.0);
   cumulant4 -> Add(cumulant2,-1.0);
   clean_histo(cumulant4,4);
   //plotfit(cumulant4,fun4,"_c4_mixed");
-  plotfit(cumulant4,fun4,"_c4");
+  plotfit(cumulant4,fun4,"_c4","c{4}");
 
   //return;
 
@@ -107,7 +107,7 @@ void rng_cumulant()
   cumulant6 -> Add(h_123,1.0);
   clean_histo(cumulant6,6);
   cumulant6->Scale(1.0/4.0); // c6 = 4v^6
-  plotfit(cumulant6,fun6,"_c6");
+  plotfit(cumulant6,fun6,"_c6","c{6}");
 
   TH1D* h_4 = histogram4 -> ProjectionX("h_4");
   TH1D* h_14 = histogram4 -> ProjectionX("h_14");
@@ -134,18 +134,18 @@ void rng_cumulant()
   cumulant8->Scale(1.0/33.0); // c8 = 33v^8
   fun8->SetParameter(0,10);
   fun8->SetParameter(1,3);
-  plotfit(cumulant8,fun8,"_c8");
+  plotfit(cumulant8,fun8,"_c8","c{8}");
 
 
 
 }
 
-void plotfit(TH1D* histogram, TF1* fun, const char* handle)
+void plotfit(TH1D* histogram, TF1* fun, const char* handle, const char* yaxistitle)
 {
 
   TCanvas* c1 = new TCanvas("c1","",800,600);
 
-  //histogram->GetYaxis()->SetTitle("c_{2}{2}"); // need to be smarter about this
+  histogram->GetYaxis()->SetTitle(yaxistitle);
   histogram->GetXaxis()->SetTitle("Number of particles");
   histogram->GetXaxis()->SetRangeUser(0,50);
   histogram->SetMarkerStyle(kFullCircle);
@@ -219,11 +219,11 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   c1->Print(Form("Figures/histogram%s_fit_500logy.png",handle));
   c1->Print(Form("Figures/histogram%s_fit_500logy.pdf",handle));
 
-  c1->SetLogy(0);
+  //c1->SetLogy(0);
 
-  histogram->GetXaxis()->SetRangeUser(0,50);
-  histogram->SetMinimum(0.0);
-  histogram->SetMaximum(1.0);
+  histogram->GetXaxis()->SetRangeUser(0,100);
+  // histogram->SetMinimum(0.0);
+  // histogram->SetMaximum(1.0);
   histogram->Draw();
   xtex = 0.57;
   ytex = 0.66;
@@ -235,8 +235,8 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle)
   ytex = 0.73;
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   fun->Draw("same");
-  c1->Print(Form("Figures/histogram%s_fit_50.png",handle));
-  c1->Print(Form("Figures/histogram%s_fit_50.pdf",handle));
+  c1->Print(Form("Figures/histogram%s_fit_100logy.png",handle));
+  c1->Print(Form("Figures/histogram%s_fit_100logy.pdf",handle));
 
   delete c1;
 
