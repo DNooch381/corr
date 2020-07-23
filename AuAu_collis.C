@@ -4,7 +4,7 @@ void plotfit(TH1D*,TF1*,const char*,const char*);
 
 void clean_histo(TH1D*,int);
 
-void rng_cumulant()
+void AuAu_collis()
 {
   TF1* fun2 = new TF1("fun2","[0]/pow(x,[1])",1.0, 500);
   fun2->SetParameter(0,1.0);
@@ -29,8 +29,8 @@ void rng_cumulant()
   // --- get the files with k-particle correlations
   //NOTE TO RON: Which macro is being pumped into this: RanGen2X.c or RanGenX.c
   
-  TFile* HistFile2 = new TFile("OutputFiles/OutFile_k2.root","read");
-  TFile* HistFile4 = new TFile("OutputFiles/OutFile_k4.root","read");
+  TFile* HistFile_AuAu1 = new TFile("OutputFiles/RootFiles/histos_12432.root","read");
+  TFile* HistFile_AuAu2 = new TFile("OutputFiles/RootFiles/histos_13799.root","read");
 
   // TFile* HistFile6 = new TFile("OutputFiles/OutFile_k6.root","read");
   // TFile* HistFile8 = new TFile("OutputFiles/OutFile_k8.root","read");
@@ -41,8 +41,8 @@ void rng_cumulant()
 
   // --- get the histograms from each file
   
-  TProfile* histogram2_f2 = (TProfile*)HistFile2->Get("hmult_recursion_0_0");
-  TProfile* histogram2_f4 = (TProfile*)HistFile4->Get("hmult_recursion_0_0");
+  TProfile* histogramAu_AuAu1 = (TProfile*)HistFile_AuAu1->Get("nfvtxt_recursion_0_0");
+  TProfile* histogramAu_AuAu2 = (TProfile*)HistFile_AuAu2->Get("nfvtxt_recursion_0_0");
 
   // TProfile* histogram2_f6 = (TProfile*)HistFile6->Get("hmult_recursion_0_0");
   // TProfile* histogram2_f8 = (TProfile*)HistFile8->Get("hmult_recursion_0_0");
@@ -75,8 +75,8 @@ void rng_cumulant()
   */
 
 
-  TH1D* cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
-  TH1D* cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
+  TH1D* AuAu2 = histogram_AuAu2 -> ProjectionX("AuAu2");
+  TH1D* AuAu1 = histogram_AuAu1 -> ProjectionX("AuAu1");
   // cumulant4 = histogram4_f4 -> ProjectionX("cumulant4");
   // cumulant2 = histogram2_f2 -> ProjectionX("cumulant2");
   plotfit(cumulant2,fun2,"_c2","c{2}");
@@ -89,14 +89,14 @@ void rng_cumulant()
 
   //return;
 
-  TProfile* histogram2 = histogram2_f2;
-  TProfile* histogram4 = histogram4_f4;
+  TProfile* histogram_AuAu1 = histogramAu_AuAu1;
+  TProfile* histogram_AuAu2 = histogramAu_AuAu2;
   //TProfile* histogram6 = histogram6_f6;
   //TProfile* histogram8 = histogram8_f8;
 
-  TH1D* h_942 = histogram4 -> ProjectionX("h_942");
-  TH1D* h_123 = histogram2 -> ProjectionX("h_123");
-  TH1D* h_2 = histogram2 -> ProjectionX("h_2");
+  TH1D* h_942 = histogram_AuAu2 -> ProjectionX("h_942");
+  TH1D* h_123 = histogram_AuAu1 -> ProjectionX("h_123");
+  TH1D* h_2 = histogram_AuAu1 -> ProjectionX("h_2");
   h_942 -> Multiply(h_2);
   h_123 -> Multiply(h_2);
   h_123 -> Multiply(h_2);
