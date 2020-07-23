@@ -4,6 +4,9 @@ void plotfit(TH1D*,TF1*,const char*,const char*);
 
 void clean_histo(TH1D*,int);
 
+//**RON** Following error after running -->  "Error in <TH1D::Add>: Attempt to add histograms with different number of bins : nbins h1 = 700 , nbins h2 =  2000"
+//**RON** Fit is very off, so need to troubleshoot 
+
 void AuAu_collis()
 {
   TF1* fun2 = new TF1("fun2","[0]/pow(x,[1])",1.0, 500);
@@ -30,6 +33,7 @@ void AuAu_collis()
   TH1D* AuAu1 = histogramAu_AuAu1 -> ProjectionX("AuAu1");
   
   plotfit(AuAu1,fun2,"_AuAu1","{AuAu1}");
+  
   AuAu1 -> Multiply(AuAu1);
   AuAu1 -> Scale(2.0);
   AuAu2 -> Add(AuAu1,-1.0);
@@ -45,6 +49,7 @@ void AuAu_collis()
   TH1D* h_942 = histogram_AuAu2 -> ProjectionX("h_942");
   TH1D* h_123 = histogram_AuAu1 -> ProjectionX("h_123");
   TH1D* h_2 = histogram_AuAu1 -> ProjectionX("h_2");
+
   h_942 -> Multiply(h_2);
   h_123 -> Multiply(h_2);
   h_123 -> Multiply(h_2);
@@ -155,8 +160,8 @@ void plotfit(TH1D* histogram, TF1* fun, const char* handle, const char* yaxistit
   tex2->DrawLatex(xtex,ytex,Form("#chi^{2}/NDF = %.2f/%d",chi2,ndf));
   fun->Draw("same");
 
-  c1->Print(Form("Figures/histogram%s_fit_100logy.png",handle));
-  c1->Print(Form("Figures/histogram%s_fit_100logy.pdf",handle));
+  c1->Print(Form("Figures/histogram%s_AuAu_fit_100logy.png",handle));
+  c1->Print(Form("Figures/histogram%s_AuAu_fit_100logy.pdf",handle));
 
   delete c1;
 }
