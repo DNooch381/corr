@@ -1,4 +1,3 @@
-// name needs to match macro
 void au_collis()
 {
 
@@ -30,9 +29,12 @@ void au_collis()
 
   //c1->Print("Figures/au_collis.png");
 
-  TF1* fun1 = new TF1("fun1","[0]/pow(x,1)",1.0,99.9);
+  TF1* fun1 = new TF1("fun1","[0]/pow(x,[1])",1.0,99.9);
   fun1->SetParameter(0,1e-2); // asymptotic behavior from combinatorics (0!)
+  fun1->SetParameter(1,1.0); // asymptotic behavior from combinatorics (0!)
 
+  tp1f_2->Fit(fun1,"","",4,20);
+  
   TF1* fun2 = new TF1("fun2","[0]/((x-1))",1.0,99.9);
   fun2->SetParameter(0,1e-2); // combinatorics suggests 0!
   fun2->SetLineColor(kBlue);
@@ -46,8 +48,6 @@ void au_collis()
   leg->AddEntry(fun2,"combinatoric function","l");
   leg->AddEntry(fun1,"power law function","l");
   leg->Draw();
-
-  // Note: this name needs to match
 
   c1->Print("Figures/au_collis_100logxlogy.png");
   c1->SetLogx(0);
