@@ -29,6 +29,8 @@ void au_collis()
 
   //c1->Print("Figures/au_collis.png");
 
+  // --- Power low
+  
   TF1* fun1 = new TF1("fun1","[0]/pow(x,[1])",1.0,99.9);
   fun1->SetParameter(0,1e-2); // asymptotic behavior from combinatorics (0!)
   fun1->SetParameter(1,1.0); // asymptotic behavior from combinatorics (0!)
