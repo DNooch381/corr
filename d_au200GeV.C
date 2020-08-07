@@ -4,12 +4,12 @@
 #include <vector>
 using namespace std;
 
-int main()
+int d_au200GeV()
 {
   
   // --- Input file
 
-  //std::vector<int> numbers;
+  std::vector<int> numbers;
   ifstream inputFile("v22.dat");
 
   // --- Open the file
