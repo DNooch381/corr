@@ -14,10 +14,10 @@ void d_au200GeV3()
 
   // --- Open file
 
-  double x[nbins];
-  double y[nbins];
-  double ey[nbins]; // stat uncert
-  double eysys[nbins]; // sys uncert
+  double x[nbins]; // number of tracks in the PHENIX FVTX
+  double y[nbins]; // v2{2} (two-particle cumulant v2)
+  double ey[nbins]; // statistical uncertainty
+  double eysys[nbins]; // systematic uncertainty
 
   ifstream textfile("v22.dat");
   for ( int i = 0; i < nbins; ++i )
@@ -32,4 +32,5 @@ void d_au200GeV3()
   tge_v22->Draw("ap");
 
   return 0;
+
 }
