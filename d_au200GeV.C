@@ -25,10 +25,6 @@ int d_au200GeV()
 	  numbers.push_back(current_number);
 	}
 
-      // --- Close file
-
-      inputFile.close();
-
       // --- Display the numbers if no errors
 
       cout << "The numbers are: ";
@@ -37,7 +33,13 @@ int d_au200GeV()
 	  cout << numbers[count] << " ";
 	}
       cout << endl;
+
+      // --- Close input file
+
+      inputFile.close();
+
     }
+
   
   // --- Error message if issue reading file
 
