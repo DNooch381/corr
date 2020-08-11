@@ -11,17 +11,22 @@ void d_au200GeV2 ()
 
   // --- Open file
   
-  fstream myfile ("v22.dat");
+  fstream textfile ("v22.dat");
   
   // --- Show file contents if opened successfully
   
-  if (myfile.is_open())
+  if (textfile.is_open())
     {
-      while (getline (myfile,line))
+
+      while (getline (textfile,line))
 	{
 	  cout << line << '\n';
 	}
-      myfile.close();
+
+      // --- Close input file
+      
+      textfile.close();
+      
     }
 
   // --- Error if unable to open/read
