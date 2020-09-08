@@ -7,7 +7,7 @@ using namespace std;
 const int nbins = 45;
 const int nbins4 = 20;
 
-int main ();
+//int main ();
 
 void d_au200GeV3()
 {
@@ -92,7 +92,7 @@ void d_au200GeV3()
   fun6->SetLineColor(kBlack);
   fun6->SetLineWidth(2);
   tge_v24->Fit(fun6,"","",10,50);
-  
+
   TLegend* leg = new TLegend(0.68,0.68,0.88,0.88); // the numbers are the coordinates x1,y1,x2,y2
   leg->AddEntry(tge_v22,"v_{2}{2}","p"); //"p" for point
   leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
@@ -116,7 +116,31 @@ void d_au200GeV3()
 
   c1->Print("dAu200_sepfits.png");
 
-  
-  return 0;
+  double residual[nbins];
+  for ( int i = 0; i < nbins; ++i )
+    {
+      residual[i] = (fun7->Eval(x[i]) - y[i])/y[i];
+    }
+
+  TGraphErrors* tge_residual = new TGraphErrors(nbins,x,residual,0,ey);
+  tge_residual->SetMarkerStyle(kFullSquare);
+  tge_residual->SetMarkerColor(kRed);
+  tge_residual->SetLineColor(kBlack);
+  tge_residual->GetXaxis()->SetTitle("N_{tracks}^{FVTX}"); // x-axis
+  tge_residual->GetYaxis()->SetTitle("Fit residual (fit - data)/data"); // y-axis
+  tge_residual->Draw("ap");
+  tge_residual->GetXaxis()->SetLimits(0.0,50.0); // x-axis range
+  tge_residual->SetMinimum(-0.2); // lowest y-axis value
+  tge_residual->SetMaximum(0.2); // max y-axis value
+
+  TLine line(0.0,0.0,50.0,0.0);
+  line.SetLineColor(kBlack);
+  line.SetLineWidth(2);
+  line.SetLineStyle(2);
+  line.Draw();
+
+  c1->Print("dAu200_residual.png");
+
+  return;
 
 }
