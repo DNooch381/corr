@@ -86,6 +86,13 @@ void d_au200GeV3()
   tge_v24->SetMinimum(0.0); // lowest y-axis value
   tge_v24->SetMaximum(0.14); // max y-axis value
 
+  TF1* fun6 = new TF1("fun6","pol1",4,50);
+  fun6->SetParameter(0,1.0);
+  fun6->SetParameter(1,1.0);
+  fun6->SetLineColor(kBlack);
+  fun6->SetLineWidth(2);
+  tge_v24->Fit(fun6,"","",10,50);
+  
   TLegend* leg = new TLegend(0.68,0.68,0.88,0.88); // the numbers are the coordinates x1,y1,x2,y2
   leg->AddEntry(tge_v22,"v_{2}{2}","p"); //"p" for point
   leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
@@ -93,6 +100,23 @@ void d_au200GeV3()
 
   c1->Print("dAu200_combfits.png");
 
+  tge_v22->Draw("ap");
+  tge_v24->Draw("p");
+  leg->Draw();
+
+  //TF1* fun7 = new TF1 ("fun7","[0]+[1]/pow(x,[2])",2,50);
+  TF1* fun7 = new TF1 ("fun7","[0]+[1]/pow(x-1,[2])",2,50);
+  fun7->SetParameter(0,0.05);
+  fun7->SetParameter(1,0.1);
+  fun7->SetParameter(2,0.5);
+  //fun7->FitParameter(2,0.5);
+  fun7->SetLineColor(kBlack);
+  fun7->SetLineWidth(2);
+  tge_v22->Fit(fun7,"","",2,50);
+
+  c1->Print("dAu200_sepfits.png");
+
+  
   return 0;
 
 }
