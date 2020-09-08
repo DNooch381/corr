@@ -10,6 +10,7 @@ int main ();
 
 void d_au200GeV3()
 {
+  //string line;
 
   TCanvas* c1 = new TCanvas("c1","");
   
@@ -17,6 +18,8 @@ void d_au200GeV3()
   double y[nbins]; // v2{2} (two-particle cumulant v2)
   double ey[nbins]; // statistical uncertainty
   double eysys[nbins]; // systematic uncertainty
+
+  // --- 2-2 Particle Data File
 
   // --- Open v22.dat file
   
@@ -54,8 +57,10 @@ void d_au200GeV3()
   tge_v22->Fit(fun3,"","",20,50);
   fun3->Draw("same");
 
-  // --- Open v24.dat File
+  // --- 2-4 Particle Data File
 
+  // --- Open v24.dat File
+  
   ifstream textfile24("v24.dat");
   for ( int i = 0; i < nbins; ++i )
     {
@@ -78,10 +83,10 @@ void d_au200GeV3()
   // Best Fit Line
   
   TF1* fun4 = new TF1("fun4","[0]/pow(x,[1])",1.0, 500);
-  fun4->SetParameter(0,1.0);
-  fun4->SetParameter(1,1.0);
-  fun4->SetLineColor(kBlack);
-  fun4->SetLineWidth(2);
+  fun2->SetParameter(0,1.0);
+  fun2->SetParameter(1,1.0);
+  fun2->SetLineColor(kBlack);
+  fun2->SetLineWidth(2);
 
   tge_v24->Fit(fun4,"","",2,20);
   fun4->Draw("same");
