@@ -9,7 +9,21 @@ const int nbins4 = 20;
 
 //int main ();
 
+void take_fun(TF1*);
+
 void d_au200GeV3()
+{
+
+  TF1* trialfun7 = new TF1 ("trialfun7","[0]+[1]/pow(x,[2])",2,50);
+  trialfun7->SetParameter(0,0.05);
+  trialfun7->SetParameter(1,0.1);
+  trialfun7->SetParameter(2,0.5);
+  take_fun(trialfun7);
+
+}
+
+
+void take_fun(TF1* fun7)
 {
   //string line;
 
@@ -28,7 +42,7 @@ void d_au200GeV3()
   for ( int i = 0; i < nbins; ++i )
     {
       textfile_v22 >> x[i] >> y[i] >> ey[i] >> eysys[i];
-      cout << x[i] << " " << y[i] << " " << ey[i] << endl;
+      //cout << x[i] << " " << y[i] << " " << ey[i] << endl;
     }
 
   TGraphErrors* tge_v22 = new TGraphErrors(nbins,x,y,0,ey);
@@ -71,7 +85,7 @@ void d_au200GeV3()
   for ( int i = 0; i < nbins4; ++i )
     {
       textfile24 >> x4[i] >> y4[i] >> ey4[i] >> eysys4[i];
-      cout << x4[i] << " " << y4[i] << " " << ey4[i] << endl;
+      //cout << x4[i] << " " << y4[i] << " " << ey4[i] << endl;
     }
 
   TGraphErrors* tge_v24 = new TGraphErrors(nbins4,x4,y4,0,ey4);
@@ -104,17 +118,11 @@ void d_au200GeV3()
   tge_v24->Draw("p");
   leg->Draw();
 
-  //TF1* fun7 = new TF1 ("fun7","[0]+[1]/pow(x,[2])",2,50);
-  TF1* fun7 = new TF1 ("fun7","[0]+[1]/pow(x-1,[2])",2,50);
-  fun7->SetParameter(0,0.05);
-  fun7->SetParameter(1,0.1);
-  fun7->SetParameter(2,0.5);
-  //fun7->FitParameter(2,0.5);
   fun7->SetLineColor(kBlack);
   fun7->SetLineWidth(2);
   tge_v22->Fit(fun7,"","",2,50);
 
-  c1->Print("dAu200_sepfits.png");
+  c1->Print(Form("dAu200_sepfits_%s.png",fun7->GetName()));
 
   double residual[nbins];
   for ( int i = 0; i < nbins; ++i )
@@ -139,7 +147,7 @@ void d_au200GeV3()
   line.SetLineStyle(2);
   line.Draw();
 
-  c1->Print("dAu200_residual.png");
+  c1->Print(Form("dAu200_residual_%s.png",fun7->GetName()));
 
   return;
 
