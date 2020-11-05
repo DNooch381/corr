@@ -14,13 +14,49 @@ void take_fun(TF1*);
 void d_au200GeV3()
 {
 
+
+
   TF1* trialfun7 = new TF1 ("trialfun7","[0]+[1]/pow(x,[2])",2,50);
   trialfun7->SetParameter(0,0.05);
   trialfun7->SetParameter(1,0.1);
   trialfun7->SetParameter(2,0.5);
   take_fun(trialfun7);
 
-}
+  TF1* trialfun6 = new TF1 ("trialfun6","[0]+[1]/pow(x,[2])",2,50);
+  trialfun6->SetParameter(0,0.05);
+  trialfun6->SetParameter(1,0.1);
+  trialfun6->FixParameter(2,1.0/sqrt(2));
+  take_fun(trialfun6);
+
+  TF1* trialfun5 = new TF1 ("trialfun5","[0]+[1]/sqrt(x-1)",2,50);
+  trialfun5->SetParameter(0,0.05);
+  trialfun5->SetParameter(1,0.1);
+  take_fun(trialfun5);
+
+  
+  TF1* trialfun8 = new TF1 ("trialfun8","sqrt(pow([0],2)+[1]/pow(x-1,[2]))",2,50);
+  trialfun8->SetParameter(0,0.05);
+  trialfun8->SetParameter(1,0.1);
+  trialfun8->FixParameter(2,1.0);
+  take_fun(trialfun8);
+
+  TF1* trialfun9 = new TF1 ("trialfun9","sqrt(pow([0],2)+[1]/pow(x,[2]))",2,50);
+  trialfun9->SetParameter(0,0.05);
+  trialfun9->SetParameter(1,0.1);
+  trialfun9->FixParameter(2,1.0);
+  take_fun(trialfun9);
+
+    
+  /* TF1* trialfun9 = new TF1 ("trialfun9","sqrt(pow([0],2)+[1]/pow(x-1,[2]))",2,50); */
+  /* trialfun9->SetParameter(0,0.05); */
+  /* trialfun9->SetParameter(1,0.1); */
+  /* trialfun9->SetParameter(2,1.0); */
+  /* take_fun(trialfun9); */
+
+  // 9/29/2020
+  // Add more functions here (trialfun9, trialfun 10, etc.) to try and get the fit to better align with the top left red bullet points
+  
+ }
 
 
 void take_fun(TF1* fun7)
@@ -60,18 +96,18 @@ void take_fun(TF1* fun7)
 
   //Best Fit Line
 
-  TF1* fun2 = new TF1("fun2","[0]/pow(x,[1])",1.0, 500);
-  fun2->SetParameter(0,1.0);
-  fun2->SetParameter(1,1.0);
-  fun2->SetLineColor(kBlack);
-  fun2->SetLineWidth(2);
+  /* TF1* fun2 = new TF1("fun2","[0]/pow(x,[1])",1.0, 500); */
+  /* fun2->SetParameter(0,1.0); */
+  /* fun2->SetParameter(1,1.0); */
+  /* fun2->SetLineColor(kBlack); */
+  /* fun2->SetLineWidth(2); */
 
-  tge_v22->Fit(fun2,"","",2,20);
-  fun2->Draw("same");
+  /* tge_v22->Fit(fun2,"","",2,20); */
+  /* fun2->Draw("same"); */
 
-  TF1* fun3 = (TF1*)fun2->Clone("fun3");
-  tge_v22->Fit(fun3,"","",20,50);
-  fun3->Draw("same");
+  /* TF1* fun3 = (TF1*)fun2->Clone("fun3"); */
+  /* tge_v22->Fit(fun3,"","",20,50); */
+  /* fun3->Draw("same"); */
 
   // --- 2-4 Particle Data File
 
@@ -112,7 +148,7 @@ void take_fun(TF1* fun7)
   leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
   leg->Draw();
 
-  c1->Print("dAu200_combfits.png");
+  // c1->Print("dAu200_combfits.png");
 
   tge_v22->Draw("ap");
   tge_v24->Draw("p");
@@ -125,9 +161,12 @@ void take_fun(TF1* fun7)
   c1->Print(Form("dAu200_sepfits_%s.png",fun7->GetName()));
 
   double residual[nbins];
+  double subtracted[nbins];
   for ( int i = 0; i < nbins; ++i )
     {
       residual[i] = (fun7->Eval(x[i]) - y[i])/y[i];
+      subtracted[i] = y[i] - (fun7->Eval(x[i]) - fun7->GetParameter(0));
+      ey[i] /= y[i];
     }
 
   TGraphErrors* tge_residual = new TGraphErrors(nbins,x,residual,0,ey);
@@ -149,6 +188,19 @@ void take_fun(TF1* fun7)
 
   c1->Print(Form("dAu200_residual_%s.png",fun7->GetName()));
 
+  TGraphErrors* tge_subtracted = new TGraphErrors(nbins,x,subtracted,0,ey);
+  tge_subtracted->SetMarkerStyle(kFullSquare);
+  tge_subtracted->SetMarkerColor(kRed);
+  tge_subtracted->SetLineColor(kBlack);
+  tge_subtracted->GetXaxis()->SetTitle("N_{tracks}^{FVTX}"); // x-axis
+  tge_subtracted->GetYaxis()->SetTitle("v2"); // y-axis
+  tge_subtracted->Draw("ap");
+  tge_subtracted->GetXaxis()->SetLimits(0.0,50.0); // x-axis range
+  tge_subtracted->SetMinimum(0); // lowest y-axis value
+  tge_subtracted->SetMaximum(0.13); // max y-axis value
+
+  tge_v24->Draw("p");
+  c1->Print(Form("dAu200_subtracted_%s.png",fun7->GetName()));
   return;
 
 }
