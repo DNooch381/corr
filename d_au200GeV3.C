@@ -14,6 +14,7 @@ void take_fun(TF1*);
 void d_au200GeV3()
 {
 
+  /*
   TF1* trialfun7 = new TF1 ("trialfun7","[0]+[1]/pow(x,[2])",2,50);
   trialfun7->SetParameter(0,0.05);
   trialfun7->SetParameter(1,0.1);
@@ -25,13 +26,36 @@ void d_au200GeV3()
   trialfun6->SetParameter(1,0.1);
   trialfun6->FixParameter(2,1.0/sqrt(2));
   take_fun(trialfun6);
+  */
 
-  TF1* trialfun5 = new TF1 ("trialfun5","[0]+[1]/sqrt(x-1)",2,50);
-  trialfun5->SetParameter(0,0.05);
-  trialfun5->SetParameter(1,0.1);
+  TF1* trialfun5 = new TF1 ("trialfun5","[0]/sqrt(x-1) + [1]",2,50);
+  trialfun5->SetParameter(0,0.1);
+  trialfun5->SetParameter(1,0.05);
   take_fun(trialfun5);
 
-  
+  TF1* trialfun51 = new TF1 ("trialfun51","[0]/sqrt(x-1) + pol1(1)",2,50);
+  trialfun51->SetParameter(0,0.1);
+  trialfun51->SetParameter(1,0.05);
+  trialfun51->SetParameter(2,0.0);
+  take_fun(trialfun51);
+
+  TF1* trialfun52 = new TF1 ("trialfun52","[0]/sqrt(x-1) + pol2(1)",2,50);
+  trialfun52->SetParameter(0,0.1);
+  trialfun52->SetParameter(1,0.05);
+  trialfun52->SetParameter(2,0.0);
+  trialfun52->SetParameter(3,0.0);
+  take_fun(trialfun52);
+
+  TF1* trialfun53 = new TF1 ("trialfun53","[0]/sqrt(x-1) + pol3(1)",2,50);
+  trialfun53->SetParameter(0,0.1);
+  trialfun53->SetParameter(1,0.05);
+  trialfun53->SetParameter(2,0.0);
+  trialfun53->SetParameter(3,0.0);
+  trialfun53->SetParameter(4,0.0);
+  take_fun(trialfun53);
+
+  return;
+
   TF1* trialfun8 = new TF1 ("trialfun8","sqrt(pow([0],2)+[1]/pow(x-1,[2]))",2,50);
   trialfun8->SetParameter(0,0.05);
   trialfun8->SetParameter(1,0.1);
@@ -146,7 +170,7 @@ void take_fun(TF1* fun7)
   leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
   leg->Draw();
 
-  // c1->Print("dAu200_combfits.png");
+  // c1->Print("Figures/dAu200_combfits.png");
 
   tge_v22->Draw("ap");
   tge_v24->Draw("p");
@@ -156,14 +180,15 @@ void take_fun(TF1* fun7)
   fun7->SetLineWidth(2);
   tge_v22->Fit(fun7,"","",2,50);
 
-  c1->Print(Form("dAu200_sepfits_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_sepfits_%s.png",fun7->GetName()));
 
   double residual[nbins];
   double subtracted[nbins];
   for ( int i = 0; i < nbins; ++i )
     {
       residual[i] = (fun7->Eval(x[i]) - y[i])/y[i];
-      subtracted[i] = y[i] - (fun7->Eval(x[i]) - fun7->GetParameter(0));
+      //subtracted[i] = y[i] - (fun7->Eval(x[i]) - fun7->GetParameter(0));
+      subtracted[i] = y[i] - (fun7->GetParameter(0)/sqrt(x[i]-1));
       ey[i] /= y[i];
     }
 
@@ -184,7 +209,7 @@ void take_fun(TF1* fun7)
   line.SetLineStyle(2);
   line.Draw();
 
-  c1->Print(Form("dAu200_residual_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_residual_%s.png",fun7->GetName()));
 
   TGraphErrors* tge_subtracted = new TGraphErrors(nbins,x,subtracted,0,ey);
   tge_subtracted->SetMarkerStyle(kFullSquare);
@@ -198,7 +223,7 @@ void take_fun(TF1* fun7)
   tge_subtracted->SetMaximum(0.13); // max y-axis value
 
   tge_v24->Draw("p");
-  c1->Print(Form("dAu200_subtracted_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_subtracted_%s.png",fun7->GetName()));
   return;
 
 }
