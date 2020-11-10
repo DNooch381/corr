@@ -14,8 +14,6 @@ void take_fun(TF1*);
 void d_au200GeV3()
 {
 
-
-
   TF1* trialfun7 = new TF1 ("trialfun7","[0]+[1]/pow(x,[2])",2,50);
   trialfun7->SetParameter(0,0.05);
   trialfun7->SetParameter(1,0.1);
