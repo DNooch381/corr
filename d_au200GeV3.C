@@ -46,7 +46,7 @@ void d_au200GeV3()
   trialfun51s->SetParameter(3,0.0);
   take_fun(trialfun51s);
 
-  return;
+  //return;
 
   TF1* trialfun52 = new TF1 ("trialfun52","[0]/sqrt(x-1) + pol2(1)",2,50);
   trialfun52->SetParameter(0,0.1);
