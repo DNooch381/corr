@@ -198,7 +198,7 @@ void take_fun(TF1* fun7)
   fun6->SetLineWidth(2);
   tge_v24->Fit(fun6,"","",10,50);
 
-  TLegend* leg = new TLegend(0.68,0.68,0.88,0.88); // the numbers are the coordinates x1,y1,x2,y2
+  TLegend* leg = new TLegend(0.68,0.72,0.88,0.92); // the numbers are the coordinates x1,y1,x2,y2
   leg->AddEntry(tge_v22,"v_{2}{2}","p"); //"p" for point
   leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
   leg->Draw();
@@ -219,10 +219,11 @@ void take_fun(TF1* fun7)
   double subtracted[nbins];
   for ( int i = 0; i < nbins; ++i )
     {
+      ey[i] /= y[i];
       residual[i] = (fun7->Eval(x[i]) - y[i])/y[i];
       //subtracted[i] = y[i] - (fun7->Eval(x[i]) - fun7->GetParameter(0));
       subtracted[i] = y[i] - (fun7->GetParameter(0)/sqrt(x[i]-1));
-      ey[i] /= y[i];
+      ey[i] *= subtracted[i];
     }
 
   TGraphErrors* tge_residual = new TGraphErrors(nbins,x,residual,0,ey);
@@ -249,12 +250,17 @@ void take_fun(TF1* fun7)
   tge_subtracted->SetMarkerColor(kRed);
   tge_subtracted->SetLineColor(kBlack);
   tge_subtracted->GetXaxis()->SetTitle("N_{tracks}^{FVTX}"); // x-axis
-  tge_subtracted->GetYaxis()->SetTitle("v2"); // y-axis
+  tge_subtracted->GetYaxis()->SetTitle("v_{2}"); // y-axis
   tge_subtracted->Draw("ap");
   tge_subtracted->GetXaxis()->SetLimits(0.0,50.0); // x-axis range
   tge_subtracted->SetMinimum(0); // lowest y-axis value
   tge_subtracted->SetMaximum(0.13); // max y-axis value
 
+  leg = new TLegend(0.68,0.72,0.88,0.92); // the numbers are the coordinates x1,y1,x2,y2
+  leg->AddEntry(tge_v22,"v_{2}{2}_{subtracted}","p"); //"p" for point
+  leg->AddEntry(tge_v24,"v_{2}{4}","p"); //"p" for point
+  leg->Draw();
+  
   tge_v24->Draw("p");
   c1->Print(Form("Figures/dAu200_subtracted_%s.png",fun7->GetName()));
   return;
