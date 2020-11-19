@@ -39,6 +39,15 @@ void d_au200GeV3()
   trialfun51->SetParameter(2,0.0);
   take_fun(trialfun51);
 
+  TF1* trialfun51s = new TF1 ("trialfun51s","[0]/sqrt(x-1) + [1]+[2]*x+[3]*sqrt(x)",2,50);
+  trialfun51s->SetParameter(0,0.1);
+  trialfun51s->SetParameter(1,0.05);
+  trialfun51s->SetParameter(2,0.0);
+  trialfun51s->SetParameter(3,0.0);
+  take_fun(trialfun51s);
+
+  return;
+
   TF1* trialfun52 = new TF1 ("trialfun52","[0]/sqrt(x-1) + pol2(1)",2,50);
   trialfun52->SetParameter(0,0.1);
   trialfun52->SetParameter(1,0.05);
