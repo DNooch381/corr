@@ -10,6 +10,7 @@ const int nbins4 = 20;
 //int main ();
 
 void take_fun(TF1*);
+void take_fun(TF1*,TF1*);
 
 void d_au200GeV3()
 {
@@ -33,11 +34,28 @@ void d_au200GeV3()
   trialfun5->SetParameter(1,0.05);
   take_fun(trialfun5);
 
+  TF1* trialfun2 = new TF1 ("trialfun5","[0]",0,50);
+  trialfun2->SetParameter(0,0.05);
+  take_fun(trialfun5,trialfun2);
+
+  //return;
+
   TF1* trialfun51 = new TF1 ("trialfun51","[0]/sqrt(x-1) + pol1(1)",2,50);
   trialfun51->SetParameter(0,0.1);
   trialfun51->SetParameter(1,0.05);
   trialfun51->SetParameter(2,0.0);
   take_fun(trialfun51);
+
+  TF1* trialfun21 = new TF1 ("trialfun21","pol1",0,50);
+  trialfun21->SetParameter(0,4.22125e-2);
+  trialfun21->SetParameter(1,2.17773e-4);
+  take_fun(trialfun51,trialfun21);
+
+   // 2  p1           4.42125e-02   1.69909e-04   2.01593e-07  -6.20337e-05
+   // 3  p2           2.17773e-04   
+
+  return;
+
 
   TF1* trialfun51s = new TF1 ("trialfun51s","[0]/sqrt(x-1) + [1]+[2]*x+[3]*sqrt(x)",2,50);
   trialfun51s->SetParameter(0,0.1);
@@ -46,7 +64,7 @@ void d_au200GeV3()
   trialfun51s->SetParameter(3,0.0);
   take_fun(trialfun51s);
 
-  //return;
+  return;
 
   TF1* trialfun52 = new TF1 ("trialfun52","[0]/sqrt(x-1) + pol2(1)",2,50);
   trialfun52->SetParameter(0,0.1);
@@ -115,6 +133,11 @@ void d_au200GeV3()
 
 
 void take_fun(TF1* fun7)
+{
+  take_fun(fun7,NULL);
+}
+
+void take_fun(TF1* fun7, TF1* fun2)
 {
   //string line;
 
@@ -215,6 +238,23 @@ void take_fun(TF1* fun7)
 
   c1->Print(Form("Figures/dAu200_sepfits_%s.png",fun7->GetName()));
 
+  if ( fun2 != NULL )
+    {
+      // --- need to figure out how to set the fun2 parameters here
+      //double* pars = fun7->GetParameters();
+      double pars[] = fun7->GetParameters();
+      int numpars = sizeof(pars)/sizeof(pars[0]);
+      int other = *(&pars + 1) - pars;
+      cout << pars << " " << pars[0] << " " << numpars << " " << other << endl;
+      for ( int i = 0; i < numpars-1; ++i )
+        {
+          cout << "Setting fun2 parameter " << i << " to " << pars[i+1] << endl;
+          fun2->SetParameter(i,pars[i+1]);
+        }
+      fun2->Draw("same");
+      c1->Print(Form("Figures/dAu200_sepfits2_%s.png",fun7->GetName()));
+    }
+
   double residual[nbins];
   double subtracted[nbins];
   for ( int i = 0; i < nbins; ++i )
@@ -263,6 +303,14 @@ void take_fun(TF1* fun7)
   
   tge_v24->Draw("p");
   c1->Print(Form("Figures/dAu200_subtracted_%s.png",fun7->GetName()));
-  return;
+
+  if ( fun2 != NULL )
+    {
+      // --- need to figure out how to set the fun2 parameters here
+      fun2->Draw("same");
+      c1->Print(Form("Figures/dAu200_subtracted2_%s.png",fun7->GetName()));
+    }
+
+  delete c1;
 
 }
