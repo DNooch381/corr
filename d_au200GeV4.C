@@ -38,26 +38,6 @@ void d_au200GeV4()
   TF1* trialfun21sq = new TF1 ("trialfun21sq","pol1(0) + [2] * sqrt(x)",0,50);
   take_fun(trialfun51sq,trialfun21sq,4);
 
-  //sqrt(10x)
-  
-  TF1* trialfun51sqx = new TF1 ("trialfun51sqx","[0]/sqrt(x-1) + pol1(1) + [3] * sqrt(10 * x)",2,50);
-  trialfun51sqx->SetParameter(0,0.1);
-  trialfun51sqx->SetParameter(1,0.05);
-  trialfun51sqx->SetParameter(2,0.0);
-  TF1* trialfun21sqx = new TF1 ("trialfun21sqx","pol1(0) + [2] * sqrt(10 * x)",0,50);
-  take_fun(trialfun51sqx,trialfun21sqx,4);
-
-  //sqrt(0.1x)
-  
-  TF1* trialfun51sqxs = new TF1 ("trialfun51sqxs","[0]/sqrt(x-1) + pol1(1) + [3] * sqrt(0.1 * x)",2,50);
-  trialfun51sqxs->SetParameter(0,0.1);
-  trialfun51sqxs->SetParameter(1,0.05);
-  trialfun51sqxs->SetParameter(2,0.0);
-  take_fun(trialfun51sqxs);
-
-  TF1* trialfun21sqxs = new TF1 ("trialfun21sqxs","pol1(0) + [2] * sqrt(0.1 * x)",0,50);
-  take_fun(trialfun51sqxs,trialfun21sqxs,4);
-
   //log(x)
   
   TF1* trialfun51ln = new TF1 ("trialfun51ln","[0]/sqrt(x-1) + pol1(1) + [3] * log(x)",2,50);
@@ -73,27 +53,9 @@ void d_au200GeV4()
   trialfun5ln->SetParameter(0,0.1);
   trialfun5ln->SetParameter(1,0.05);
   trialfun5ln->SetParameter(2,0.0);
-  TF1* trialfun2ln = new TF1 ("trialfun2ln","pol0(0) + [1] * log(x)",0,50);
+  TF1* trialfun2ln = new TF1 ("trialfun2ln","pol0(0) + [1] * log(x)",1,50);
   take_fun(trialfun5ln,trialfun2ln,3);
 
-  //log(10x)
-  
-  TF1* trialfun5lnx = new TF1 ("trialfun5lnx","[0]/sqrt(x-1) + pol0(1) + [2] * log(10 * x)",2,50);
-  trialfun5lnx->SetParameter(0,0.1);
-  trialfun5lnx->SetParameter(1,0.05);
-  trialfun5lnx->SetParameter(2,0.0);
-  TF1* trialfun2lnx = new TF1 ("trialfun2lnx","pol0(0) + [1] * log(x)",0,50);
-  take_fun(trialfun5lnx,trialfun2lnx,3);
-  
-  //log(0.1x)
- 
-  TF1* trialfun5lnxs = new TF1 ("trialfun5lnxs","[0]/sqrt(x-1) + pol0(1) + [2] * log(0.1 * x)",2,50);
-  trialfun5lnxs->SetParameter(0,0.1);
-  trialfun5lnxs->SetParameter(1,0.05);
-  trialfun5lnxs->SetParameter(2,0.0);
-  TF1* trialfun2lnxs = new TF1 ("trialfun2lnxs","pol0(0) + [1] * log(0.1 * x)",0,50);
-  take_fun(trialfun5lnxs,trialfun2lnxs,3);
-   
 }
 
 void take_fun(TF1* fun7)
