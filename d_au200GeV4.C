@@ -22,15 +22,12 @@ void d_au200GeV4()
   take_fun(trialfun5,trialfun2,2);
 
 
-
   TF1* trialfun51 = new TF1 ("trialfun51","[0]/sqrt(x-1) + pol1(1)",2,50);
   trialfun51->SetParameter(0,0.1);
   trialfun51->SetParameter(1,0.05);
   trialfun51->SetParameter(2,0.0);
   TF1* trialfun21 = new TF1 ("trialfun21","pol1",0,50);
   take_fun(trialfun51,trialfun21,3);
-
-
 
   //sqrt(x)
   
@@ -60,8 +57,6 @@ void d_au200GeV4()
 
   TF1* trialfun21sqxs = new TF1 ("trialfun21sqxs","pol1(0) + [2] * sqrt(0.1 * x)",0,50);
   take_fun(trialfun51sqxs,trialfun21sqxs,4);
-
-
 
   //log(x)
   
