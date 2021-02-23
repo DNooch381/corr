@@ -15,6 +15,14 @@ void take_fun(TF1*,TF1*,int);
 void d_au200GeV4()
 {
 
+  TF1* trialfunshortrange = new TF1 ("trialfunshortrange","[0]/sqrt(x-1) + [1]",2,50);
+  trialfunshortrange->SetParameter(0,0.1);
+  trialfunshortrange->SetParameter(1,0.05);
+  TF1* trialfun2short = new TF1 ("trialfun2short","[0]",0,50);
+  take_fun(trialfunshortrange,trialfun2short,2);
+
+  return;
+
   TF1* trialfun5 = new TF1 ("trialfun5","[0]/sqrt(x-1) + [1]",2,50);
   trialfun5->SetParameter(0,0.1);
   trialfun5->SetParameter(1,0.05);
@@ -156,7 +164,8 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars)
 
   fun7->SetLineColor(kBlack);
   fun7->SetLineWidth(2);
-  tge_v22->Fit(fun7,"","",2,50);
+  tge_v22->Fit(fun7,"","",2,10);
+  fun7->Draw("same");
 
   c1->Print(Form("Figures/dAu200_sepfits_%s.png",fun7->GetName()));
 
