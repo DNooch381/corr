@@ -11,6 +11,7 @@ const int nbins4 = 20;
 
 void take_fun(TF1*);
 void take_fun(TF1*,TF1*,int);
+void take_fun(TF1*,TF1*,int,int,int);
 
 void d_au200GeV5()
 {
@@ -19,8 +20,12 @@ void d_au200GeV5()
   trialfunshortrange->SetParameter(0,0.1);
   trialfunshortrange->SetParameter(1,0.05);
   TF1* trialfun2short = new TF1 ("trialfun2short","[0]",0,50);
-  take_fun(trialfunshortrange,trialfun2short,2);
-
+  take_fun(trialfunshortrange,trialfun2short,2,2,10);
+  take_fun(trialfunshortrange,trialfun2short,2,2,12);
+  take_fun(trialfunshortrange,trialfun2short,2,2,15);
+  take_fun(trialfunshortrange,trialfun2short,2,2,20);
+  take_fun(trialfunshortrange,trialfun2short,2,2,50);
+  
   return;
 
   TF1* trialfun5 = new TF1 ("trialfun5","[0]/sqrt(x-1) + [1]",2,50);
@@ -77,10 +82,15 @@ void d_au200GeV5()
 
 void take_fun(TF1* fun7)
 {
-  take_fun(fun7,NULL,0);
+  take_fun(fun7,NULL,0,2,50);
 }
 
-void take_fun(TF1* fun7, TF1* fun2, int numpars)
+void take_fun(TF1* fun7,TF1*fun2,int numpars)
+{
+  take_fun(fun7,fun2,numpars,2,50);
+}
+
+void take_fun(TF1* fun7, TF1* fun2, int numpars, int rangelowside, int rangehighside)
 {
   //string line;
 
@@ -164,10 +174,10 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars)
 
   fun7->SetLineColor(kBlack);
   fun7->SetLineWidth(2);
-  tge_v22->Fit(fun7,"","",2,10);
+  tge_v22->Fit(fun7,"","",rangelowside,rangehighside);
   fun7->Draw("same");
 
-  c1->Print(Form("Figures/dAu200_sepfits_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_sepfits_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
 
   if ( fun2 != NULL )
     {
@@ -183,7 +193,7 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars)
           fun2->SetParameter(i,pars[i+1]);
         }
       fun2->Draw("same");
-      c1->Print(Form("Figures/dAu200_sepfits2_%s.png",fun7->GetName()));
+      c1->Print(Form("Figures/dAu200_sepfits2_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
     }
 
   double residual[nbins];
@@ -214,7 +224,7 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars)
   line.SetLineStyle(2);
   line.Draw();
 
-  c1->Print(Form("Figures/dAu200_residual_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_residual_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
 
   TGraphErrors* tge_subtracted = new TGraphErrors(nbins,x,subtracted,0,ey);
   tge_subtracted->SetMarkerStyle(kFullSquare);
@@ -233,13 +243,13 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars)
   leg->Draw();
   
   tge_v24->Draw("p");
-  c1->Print(Form("Figures/dAu200_subtracted_%s.png",fun7->GetName()));
+  c1->Print(Form("Figures/dAu200_subtracted_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
 
   if ( fun2 != NULL )
     {
       // --- need to figure out how to set the fun2 parameters here
       fun2->Draw("same");
-      c1->Print(Form("Figures/dAu200_subtracted2_%s.png",fun7->GetName()));
+      c1->Print(Form("Figures/dAu200_subtracted2_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
     }
 
   delete c1;
