@@ -25,6 +25,10 @@ void d_au200GeV5()
   take_fun(trialfunshortrange,trialfun2short,2,2,15);
   take_fun(trialfunshortrange,trialfun2short,2,2,20);
   take_fun(trialfunshortrange,trialfun2short,2,2,50);
+  take_fun(trialfunshortrange,trialfun2short,2,10,50);
+  take_fun(trialfunshortrange,trialfun2short,2,20,50);
+  take_fun(trialfunshortrange,trialfun2short,2,30,50);
+  take_fun(trialfunshortrange,trialfun2short,2,40,50);
   
   return;
 
@@ -177,6 +181,17 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars, int rangelowside, int rangehigh
   tge_v22->Fit(fun7,"","",rangelowside,rangehighside);
   fun7->Draw("same");
 
+  TLatex* tex = new TLatex();
+  tex->SetNDC();
+  TLatex* tex2 = new TLatex();
+  tex2->SetNDC();
+  TLatex* tex3 = new TLatex();
+  tex3->SetNDC();
+  double xtex = 0.2;
+  double ytex = 0.2;
+  tex3->DrawLatex(xtex,ytex,Form("p_{0} = %.3f #pm %.3f",fun7->GetParameter(0),fun7->GetParError(0)));
+
+  
   c1->Print(Form("Figures/dAu200_sepfits_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
 
   if ( fun2 != NULL )
@@ -243,6 +258,9 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars, int rangelowside, int rangehigh
   leg->Draw();
   
   tge_v24->Draw("p");
+  tex2->SetTextColor(kRed);
+  tex2->DrawLatex(xtex,ytex,Form("p_{1} = %.3f #pm %.3f",fun7->GetParameter(1),fun7->GetParError(1)));
+
   c1->Print(Form("Figures/dAu200_subtracted_%s_%d_%d.png",fun7->GetName(),rangelowside,rangehighside));
 
   if ( fun2 != NULL )
