@@ -16,7 +16,7 @@ void take_fun(TF1*,TF1*,int,int,int);
 void d_au200GeV5()
 {
 
-  TF1* trialfunshortrange = new TF1 ("trialfunshortrange","[0]/sqrt(x-1) + [1]",2,50);
+  TF1* trialfunshortrange = new TF1 ("trialfunshortrange","[0]/sqrt(x) + [1]",2,50);
   trialfunshortrange->SetParameter(0,0.1);
   trialfunshortrange->SetParameter(1,0.05);
   TF1* trialfun2short = new TF1 ("trialfun2short","[0]",0,50);
@@ -218,7 +218,7 @@ void take_fun(TF1* fun7, TF1* fun2, int numpars, int rangelowside, int rangehigh
       ey[i] /= y[i];
       residual[i] = (fun7->Eval(x[i]) - y[i])/y[i];
       //subtracted[i] = y[i] - (fun7->Eval(x[i]) - fun7->GetParameter(0));
-      subtracted[i] = y[i] - (fun7->GetParameter(0)/sqrt(x[i]-1));
+      subtracted[i] = y[i] - (fun7->GetParameter(0)/sqrt(x[i]));
       ey[i] *= subtracted[i];
     }
 
